@@ -204,7 +204,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\troyi\\Documents\\IT Projects\\food-ordering\\order-app-backend\\prisma\\generated\\client",
+      "value": "C:\\Users\\troyi\\Documents\\IT Projects\\food-ordering\\order-app-ai-backend\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -215,10 +215,18 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "linux-musl"
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\troyi\\Documents\\IT Projects\\food-ordering\\order-app-backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\troyi\\Documents\\IT Projects\\food-ordering\\order-app-ai-backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -241,8 +249,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\nmodel User {\n  id               String       @id @default(cuid())\n  email            String       @unique\n  firebaseUid      String       @unique\n  givenName        String?\n  familyName       String?\n  phoneNumber      String?      @unique\n  address          String?\n  role             UserRole     @default(CUSTOMER)\n  companies        Company[]    @relation(\"CompanyAdmins\")\n  createdCompanies Company[]    @relation(\"UserCreatedCompanies\")\n  orders           Order[]\n  createdAt        DateTime     @default(now())\n  inviteCodesUsed  InviteCode[] @relation(\"InviteCodeUsedBy\")\n}\n\nmodel Company {\n  id          String     @id @default(cuid())\n  name        String\n  address     String?\n  shortCode   String     @unique // 4-digit unique code\n  currency    String\n  items       MenuItem[]\n  orders      Order[]\n  admins      User[]     @relation(\"CompanyAdmins\")\n  createdById String\n  createdBy   User       @relation(\"UserCreatedCompanies\", fields: [createdById], references: [id])\n  createdAt   DateTime   @default(now())\n}\n\nenum UserRole {\n  SUPER_ADMIN\n  COMPANY_ADMIN\n  CUSTOMER\n}\n\nmodel MenuItem {\n  id              String      @id @default(cuid())\n  companyId       String\n  name            String\n  description     String?\n  price           Float\n  currency        String?\n  stripeProductId String?\n  stripePricingId String?\n  createdAt       DateTime    @default(now())\n  company         Company     @relation(fields: [companyId], references: [id])\n  orderItems      OrderItem[]\n}\n\nmodel Order {\n  id                    String      @id @default(cuid())\n  userId                String?\n  companyId             String\n  customerName          String\n  phoneNumber           String\n  diningType            String\n  seatNo                String?\n  preferredDiningTime   String?\n  preferredDeliveryTime String?\n  preferredPickupTime   String?\n  deliveryAddress       String?\n  totalOrderCost        Float\n  specialInstructions   String?\n  orderDate             DateTime\n  createdAt             DateTime    @default(now())\n  user                  User?       @relation(fields: [userId], references: [id])\n  company               Company     @relation(fields: [companyId], references: [id])\n  orderItems            OrderItem[]\n}\n\nmodel OrderItem {\n  id                  String    @id @default(cuid())\n  orderId             String\n  itemId              String?\n  itemName            String\n  size                String\n  quantity            Int\n  pricePerItem        Float\n  totalPrice          Float\n  specialInstructions String?\n  order               Order     @relation(fields: [orderId], references: [id])\n  item                MenuItem? @relation(fields: [itemId], references: [id])\n}\n\nmodel InviteCode {\n  id        String   @id @default(cuid())\n  code      String   @unique\n  isUsed    Boolean  @default(false)\n  createdAt DateTime @default(now())\n  usedById  String?\n  usedBy    User?    @relation(\"InviteCodeUsedBy\", fields: [usedById], references: [id])\n}\n",
-  "inlineSchemaHash": "a90d53210e7ccf6291021d4d92231e8ae4d7c9e1eccdc3c6d492052ecf81c781",
+  "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"./generated/client\"\n  binaryTargets = [\"native\", \"linux-musl\", \"rhel-openssl-3.0.x\"]\n}\n\nmodel User {\n  id               String       @id @default(cuid())\n  email            String       @unique\n  firebaseUid      String       @unique\n  givenName        String?\n  familyName       String?\n  phoneNumber      String?      @unique\n  address          String?\n  role             UserRole     @default(CUSTOMER)\n  companies        Company[]    @relation(\"CompanyAdmins\")\n  createdCompanies Company[]    @relation(\"UserCreatedCompanies\")\n  orders           Order[]\n  createdAt        DateTime     @default(now())\n  inviteCodesUsed  InviteCode[] @relation(\"InviteCodeUsedBy\")\n}\n\nmodel Company {\n  id          String     @id @default(cuid())\n  name        String\n  address     String?\n  shortCode   String     @unique // 4-digit unique code\n  currency    String\n  items       MenuItem[]\n  orders      Order[]\n  admins      User[]     @relation(\"CompanyAdmins\")\n  createdById String\n  createdBy   User       @relation(\"UserCreatedCompanies\", fields: [createdById], references: [id])\n  createdAt   DateTime   @default(now())\n}\n\nenum UserRole {\n  SUPER_ADMIN\n  COMPANY_ADMIN\n  CUSTOMER\n}\n\nmodel MenuItem {\n  id              String      @id @default(cuid())\n  companyId       String\n  name            String\n  description     String?\n  price           Float\n  currency        String?\n  stripeProductId String?\n  stripePricingId String?\n  createdAt       DateTime    @default(now())\n  company         Company     @relation(fields: [companyId], references: [id])\n  orderItems      OrderItem[]\n}\n\nmodel Order {\n  id                    String      @id @default(cuid())\n  userId                String?\n  companyId             String\n  customerName          String\n  phoneNumber           String\n  diningType            String\n  seatNo                String?\n  preferredDiningTime   String?\n  preferredDeliveryTime String?\n  preferredPickupTime   String?\n  deliveryAddress       String?\n  totalOrderCost        Float\n  specialInstructions   String?\n  orderDate             DateTime\n  createdAt             DateTime    @default(now())\n  user                  User?       @relation(fields: [userId], references: [id])\n  company               Company     @relation(fields: [companyId], references: [id])\n  orderItems            OrderItem[]\n}\n\nmodel OrderItem {\n  id                  String    @id @default(cuid())\n  orderId             String\n  itemId              String?\n  itemName            String\n  size                String\n  quantity            Int\n  pricePerItem        Float\n  totalPrice          Float\n  specialInstructions String?\n  order               Order     @relation(fields: [orderId], references: [id])\n  item                MenuItem? @relation(fields: [itemId], references: [id])\n}\n\nmodel InviteCode {\n  id        String   @id @default(cuid())\n  code      String   @unique\n  isUsed    Boolean  @default(false)\n  createdAt DateTime @default(now())\n  usedById  String?\n  usedBy    User?    @relation(\"InviteCodeUsedBy\", fields: [usedById], references: [id])\n}\n",
+  "inlineSchemaHash": "6b80c05f28130c6a4c1c32df95619188dd536f1075d5eda4b98662849babeb0c",
   "copyEngine": true
 }
 
@@ -283,6 +291,14 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "prisma/generated/client/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-linux-musl.so.node");
+path.join(process.cwd(), "prisma/generated/client/libquery_engine-linux-musl.so.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-rhel-openssl-3.0.x.so.node");
+path.join(process.cwd(), "prisma/generated/client/libquery_engine-rhel-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma/generated/client/schema.prisma")
