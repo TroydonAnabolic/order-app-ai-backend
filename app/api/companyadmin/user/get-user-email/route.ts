@@ -11,13 +11,7 @@ export async function GET(request: Request) {
     });
   }
   console.log("Received email on server:", email);
-  const prisma = new PrismaClient({
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-  });
+  const prisma = new PrismaClient();
   try {
     // Fetch the user from the database
     const user = await prisma.user.findUnique({
