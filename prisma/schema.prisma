@@ -1,0 +1,102 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+generator client {
+  provider = "prisma-client-js"
+ // output = "./generated/client"
+}
+
+model User {
+  id                String     @id @default(cuid())
+  email             String     @unique
+  firebaseUid       String     @unique
+  givenName         String?
+  familyName        String?
+  phoneNumber       String?    @unique
+  address           String?
+  role              UserRole   @default(CUSTOMER)
+  companies         Company[]  @relation("CompanyAdmins")
+  createdCompanies  Company[]  @relation("UserCreatedCompanies")
+  orders            Order[]
+  createdAt         DateTime   @default(now())
+  inviteCodesUsed   InviteCode[] @relation("InviteCodeUsedBy")
+}
+
+model Company {
+  id            String    @id @default(cuid())
+  name          String
+  address       String?
+  shortCode     String     @unique // 4-digit unique code
+  currency      String
+  items         MenuItem[]
+  orders        Order[]
+  admins        User[]    @relation("CompanyAdmins")
+  createdById   String
+  createdBy     User      @relation("UserCreatedCompanies", fields: [createdById], references: [id])
+  createdAt     DateTime  @default(now())
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  COMPANY_ADMIN
+  CUSTOMER
+}
+
+model MenuItem {
+  id          String   @id @default(cuid())
+  companyId   String
+  name        String
+  description String?
+  price       Float
+  currency    String?
+  stripeProductId String?
+  stripePricingId String?
+  createdAt   DateTime @default(now())
+  company     Company  @relation(fields: [companyId], references: [id])
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id                        String      @id @default(cuid())
+  userId                    String?
+  companyId                 String
+  customerName              String
+  phoneNumber               String
+  diningType                String
+  seatNo                    String?
+  preferredDiningTime       String?
+  preferredDeliveryTime     String?
+  preferredPickupTime       String?
+  deliveryAddress           String?
+  totalOrderCost            Float
+  specialInstructions       String?
+  orderDate                 DateTime
+  createdAt                 DateTime    @default(now())
+  user                      User?       @relation(fields: [userId], references: [id])
+  company                   Company     @relation(fields: [companyId], references: [id])
+  orderItems                OrderItem[]
+}
+
+model OrderItem {
+  id                  String   @id @default(cuid())
+  orderId             String
+  itemId              String?
+  itemName            String
+  size                String
+  quantity            Int
+  pricePerItem        Float
+  totalPrice          Float
+  specialInstructions String?
+  order               Order    @relation(fields: [orderId], references: [id])
+  item                MenuItem?    @relation(fields: [itemId], references: [id])
+}
+
+model InviteCode {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  isUsed    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  usedById  String?
+  usedBy    User?    @relation("InviteCodeUsedBy", fields: [usedById], references: [id])
+}
