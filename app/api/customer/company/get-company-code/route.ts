@@ -3,12 +3,12 @@ import { PrismaClient } from "@/prisma/generated/client";
 // Gets menu items based on company name
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const companyName = url.searchParams.get("companyName");
+  const code = url.searchParams.get("code");
 
-  console.log(" Received company name from the server: " + companyName);
+  console.log(" Received company name from the server: " + code);
 
-  if (!companyName) {
-    return new Response(JSON.stringify({ error: "companyName is required" }), {
+  if (!code) {
+    return new Response(JSON.stringify({ error: "code is required" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
     });
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 
   try {
     const company = await prisma.company.findFirst({
-      where: { name: companyName },
+      where: { shortCode: code },
       select: {
         id: true,
         name: true,
