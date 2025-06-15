@@ -1,5 +1,4 @@
 import { PrismaClient } from "@/prisma/generated/client";
-import { withAccelerate } from "@prisma/extension-accelerate";
 
 export async function POST(request: Request) {
   const { name, address, firebaseUid } = await request.json();
@@ -20,7 +19,7 @@ export async function POST(request: Request) {
         url: process.env.DATABASE_URL,
       },
     },
-  }).$extends(withAccelerate());
+  });
 
   try {
     // get the user based on firebaseUid
