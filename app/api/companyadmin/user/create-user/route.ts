@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/generated/client/edge";
+import { PrismaClient } from "@/prisma/generated/client";
 
 // TODO: Implement this for staff registration app instead, super admin must not have registration
 export async function POST(request: Request) {

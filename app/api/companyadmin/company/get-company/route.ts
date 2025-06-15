@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/generated/client/edge";
+import { PrismaClient } from "@/prisma/generated/client";
 
 // GET: Get a single company by companyId, including menu items
 export async function GET(request: Request) {

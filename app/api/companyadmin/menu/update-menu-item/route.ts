@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/generated/client/edge";
+import { PrismaClient } from "@/prisma/generated/client";
 
 export async function PUT(request: Request) {
   const body = await request.json();

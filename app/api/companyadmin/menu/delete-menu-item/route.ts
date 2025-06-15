@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/generated/client/edge";
+import { PrismaClient } from "@/prisma/generated/client";
 
 export async function DELETE(request: Request) {
   const { id } = await request.json();

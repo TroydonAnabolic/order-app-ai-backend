@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/generated/client/edge";
+import { PrismaClient } from "@/prisma/generated/client";
 
 // POST: Add a menu item to a company
 export async function POST(request: Request) {

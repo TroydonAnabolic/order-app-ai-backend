@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/generated/client/edge";
+import { PrismaClient } from "@/prisma/generated/client";
 
 // gets the user based on firebaseUid
 export async function GET(request: Request) {
@@ -11,7 +11,13 @@ export async function GET(request: Request) {
     });
   }
   console.log("Received email on server:", email);
-  const prisma = new PrismaClient();
+  const prisma = new PrismaClient({
+    datasources: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
+  });
   try {
     // Fetch the user from the database
     const user = await prisma.user.findUnique({

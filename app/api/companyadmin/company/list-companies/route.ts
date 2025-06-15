@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/generated/client/edge";
+import { PrismaClient } from "@/prisma/generated/client";
 
 // GET: List companies linked to the user by firebaseUid
 export async function GET(request: Request) {
