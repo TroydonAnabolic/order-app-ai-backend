@@ -184,6 +184,19 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   specialInstructions: 'specialInstructions'
 };
 
+exports.Prisma.ReservationScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  userId: 'userId',
+  name: 'name',
+  phoneNumber: 'phoneNumber',
+  diningDate: 'diningDate',
+  preferredTime: 'preferredTime',
+  seatNumbers: 'seatNumbers',
+  specialInstructions: 'specialInstructions',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.InviteCodeScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -218,6 +231,7 @@ exports.Prisma.ModelName = {
   MenuItem: 'MenuItem',
   Order: 'Order',
   OrderItem: 'OrderItem',
+  Reservation: 'Reservation',
   InviteCode: 'InviteCode'
 };
 

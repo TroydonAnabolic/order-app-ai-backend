@@ -22,6 +22,7 @@ model User {
   orders            Order[]
   createdAt         DateTime   @default(now())
   inviteCodesUsed   InviteCode[] @relation("InviteCodeUsedBy")
+  reservations    Reservation[]
 }
 
 model Company {
@@ -36,6 +37,7 @@ model Company {
   createdById   String
   createdBy     User      @relation("UserCreatedCompanies", fields: [createdById], references: [id])
   createdAt     DateTime  @default(now())
+  reservations    Reservation[]
 }
 
 enum UserRole {
@@ -92,6 +94,23 @@ model OrderItem {
   order               Order    @relation(fields: [orderId], references: [id])
   item                MenuItem?    @relation(fields: [itemId], references: [id])
 }
+
+model Reservation {
+  id                   String   @id @default(cuid())
+  companyId            String
+  userId               String?  // optional link to a user
+  name                 String
+  phoneNumber          String
+  diningDate           DateTime
+  preferredTime        String
+  seatNumbers          String   // comma-separated list (can later normalize if needed)
+  specialInstructions  String?
+  createdAt            DateTime @default(now())
+
+  company              Company  @relation(fields: [companyId], references: [id])
+  user                 User?    @relation(fields: [userId], references: [id])
+}
+
 
 model InviteCode {
   id        String   @id @default(cuid())
