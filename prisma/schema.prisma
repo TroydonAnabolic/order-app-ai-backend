@@ -51,10 +51,11 @@ model MenuItem {
   companyId   String
   name        String
   description String?
-  price       Float
+  price       Float @default(0.0)
+  quantity    Int @default(0)
   currency    String?
-  stripeProductId String?
-  stripePricingId String?
+  size        String   @default("Medium")
+  specialInstructions String   @default("No special instructions")
   createdAt   DateTime @default(now())
   company     Company  @relation(fields: [companyId], references: [id])
   orderItems  OrderItem[]

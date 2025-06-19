@@ -4065,10 +4065,12 @@ export namespace Prisma {
 
   export type MenuItemAvgAggregateOutputType = {
     price: number | null
+    quantity: number | null
   }
 
   export type MenuItemSumAggregateOutputType = {
     price: number | null
+    quantity: number | null
   }
 
   export type MenuItemMinAggregateOutputType = {
@@ -4077,9 +4079,10 @@ export namespace Prisma {
     name: string | null
     description: string | null
     price: number | null
+    quantity: number | null
     currency: string | null
-    stripeProductId: string | null
-    stripePricingId: string | null
+    size: string | null
+    specialInstructions: string | null
     createdAt: Date | null
   }
 
@@ -4089,9 +4092,10 @@ export namespace Prisma {
     name: string | null
     description: string | null
     price: number | null
+    quantity: number | null
     currency: string | null
-    stripeProductId: string | null
-    stripePricingId: string | null
+    size: string | null
+    specialInstructions: string | null
     createdAt: Date | null
   }
 
@@ -4101,9 +4105,10 @@ export namespace Prisma {
     name: number
     description: number
     price: number
+    quantity: number
     currency: number
-    stripeProductId: number
-    stripePricingId: number
+    size: number
+    specialInstructions: number
     createdAt: number
     _all: number
   }
@@ -4111,10 +4116,12 @@ export namespace Prisma {
 
   export type MenuItemAvgAggregateInputType = {
     price?: true
+    quantity?: true
   }
 
   export type MenuItemSumAggregateInputType = {
     price?: true
+    quantity?: true
   }
 
   export type MenuItemMinAggregateInputType = {
@@ -4123,9 +4130,10 @@ export namespace Prisma {
     name?: true
     description?: true
     price?: true
+    quantity?: true
     currency?: true
-    stripeProductId?: true
-    stripePricingId?: true
+    size?: true
+    specialInstructions?: true
     createdAt?: true
   }
 
@@ -4135,9 +4143,10 @@ export namespace Prisma {
     name?: true
     description?: true
     price?: true
+    quantity?: true
     currency?: true
-    stripeProductId?: true
-    stripePricingId?: true
+    size?: true
+    specialInstructions?: true
     createdAt?: true
   }
 
@@ -4147,9 +4156,10 @@ export namespace Prisma {
     name?: true
     description?: true
     price?: true
+    quantity?: true
     currency?: true
-    stripeProductId?: true
-    stripePricingId?: true
+    size?: true
+    specialInstructions?: true
     createdAt?: true
     _all?: true
   }
@@ -4246,9 +4256,10 @@ export namespace Prisma {
     name: string
     description: string | null
     price: number
+    quantity: number
     currency: string | null
-    stripeProductId: string | null
-    stripePricingId: string | null
+    size: string
+    specialInstructions: string
     createdAt: Date
     _count: MenuItemCountAggregateOutputType | null
     _avg: MenuItemAvgAggregateOutputType | null
@@ -4277,9 +4288,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     price?: boolean
+    quantity?: boolean
     currency?: boolean
-    stripeProductId?: boolean
-    stripePricingId?: boolean
+    size?: boolean
+    specialInstructions?: boolean
     createdAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     orderItems?: boolean | MenuItem$orderItemsArgs<ExtArgs>
@@ -4292,9 +4304,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     price?: boolean
+    quantity?: boolean
     currency?: boolean
-    stripeProductId?: boolean
-    stripePricingId?: boolean
+    size?: boolean
+    specialInstructions?: boolean
     createdAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menuItem"]>
@@ -4305,9 +4318,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     price?: boolean
+    quantity?: boolean
     currency?: boolean
-    stripeProductId?: boolean
-    stripePricingId?: boolean
+    size?: boolean
+    specialInstructions?: boolean
     createdAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menuItem"]>
@@ -4318,13 +4332,14 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     price?: boolean
+    quantity?: boolean
     currency?: boolean
-    stripeProductId?: boolean
-    stripePricingId?: boolean
+    size?: boolean
+    specialInstructions?: boolean
     createdAt?: boolean
   }
 
-  export type MenuItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyId" | "name" | "description" | "price" | "currency" | "stripeProductId" | "stripePricingId" | "createdAt", ExtArgs["result"]["menuItem"]>
+  export type MenuItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyId" | "name" | "description" | "price" | "quantity" | "currency" | "size" | "specialInstructions" | "createdAt", ExtArgs["result"]["menuItem"]>
   export type MenuItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     orderItems?: boolean | MenuItem$orderItemsArgs<ExtArgs>
@@ -4349,9 +4364,10 @@ export namespace Prisma {
       name: string
       description: string | null
       price: number
+      quantity: number
       currency: string | null
-      stripeProductId: string | null
-      stripePricingId: string | null
+      size: string
+      specialInstructions: string
       createdAt: Date
     }, ExtArgs["result"]["menuItem"]>
     composites: {}
@@ -4783,9 +4799,10 @@ export namespace Prisma {
     readonly name: FieldRef<"MenuItem", 'String'>
     readonly description: FieldRef<"MenuItem", 'String'>
     readonly price: FieldRef<"MenuItem", 'Float'>
+    readonly quantity: FieldRef<"MenuItem", 'Int'>
     readonly currency: FieldRef<"MenuItem", 'String'>
-    readonly stripeProductId: FieldRef<"MenuItem", 'String'>
-    readonly stripePricingId: FieldRef<"MenuItem", 'String'>
+    readonly size: FieldRef<"MenuItem", 'String'>
+    readonly specialInstructions: FieldRef<"MenuItem", 'String'>
     readonly createdAt: FieldRef<"MenuItem", 'DateTime'>
   }
     
@@ -9958,9 +9975,10 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     price: 'price',
+    quantity: 'quantity',
     currency: 'currency',
-    stripeProductId: 'stripeProductId',
-    stripePricingId: 'stripePricingId',
+    size: 'size',
+    specialInstructions: 'specialInstructions',
     createdAt: 'createdAt'
   };
 
@@ -10312,9 +10330,10 @@ export namespace Prisma {
     name?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     price?: FloatFilter<"MenuItem"> | number
+    quantity?: IntFilter<"MenuItem"> | number
     currency?: StringNullableFilter<"MenuItem"> | string | null
-    stripeProductId?: StringNullableFilter<"MenuItem"> | string | null
-    stripePricingId?: StringNullableFilter<"MenuItem"> | string | null
+    size?: StringFilter<"MenuItem"> | string
+    specialInstructions?: StringFilter<"MenuItem"> | string
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     orderItems?: OrderItemListRelationFilter
@@ -10326,9 +10345,10 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     price?: SortOrder
+    quantity?: SortOrder
     currency?: SortOrderInput | SortOrder
-    stripeProductId?: SortOrderInput | SortOrder
-    stripePricingId?: SortOrderInput | SortOrder
+    size?: SortOrder
+    specialInstructions?: SortOrder
     createdAt?: SortOrder
     company?: CompanyOrderByWithRelationInput
     orderItems?: OrderItemOrderByRelationAggregateInput
@@ -10343,9 +10363,10 @@ export namespace Prisma {
     name?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     price?: FloatFilter<"MenuItem"> | number
+    quantity?: IntFilter<"MenuItem"> | number
     currency?: StringNullableFilter<"MenuItem"> | string | null
-    stripeProductId?: StringNullableFilter<"MenuItem"> | string | null
-    stripePricingId?: StringNullableFilter<"MenuItem"> | string | null
+    size?: StringFilter<"MenuItem"> | string
+    specialInstructions?: StringFilter<"MenuItem"> | string
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     orderItems?: OrderItemListRelationFilter
@@ -10357,9 +10378,10 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     price?: SortOrder
+    quantity?: SortOrder
     currency?: SortOrderInput | SortOrder
-    stripeProductId?: SortOrderInput | SortOrder
-    stripePricingId?: SortOrderInput | SortOrder
+    size?: SortOrder
+    specialInstructions?: SortOrder
     createdAt?: SortOrder
     _count?: MenuItemCountOrderByAggregateInput
     _avg?: MenuItemAvgOrderByAggregateInput
@@ -10377,9 +10399,10 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"MenuItem"> | string
     description?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
     price?: FloatWithAggregatesFilter<"MenuItem"> | number
+    quantity?: IntWithAggregatesFilter<"MenuItem"> | number
     currency?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
-    stripeProductId?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
-    stripePricingId?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
+    size?: StringWithAggregatesFilter<"MenuItem"> | string
+    specialInstructions?: StringWithAggregatesFilter<"MenuItem"> | string
     createdAt?: DateTimeWithAggregatesFilter<"MenuItem"> | Date | string
   }
 
@@ -10907,10 +10930,11 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
-    price: number
+    price?: number
+    quantity?: number
     currency?: string | null
-    stripeProductId?: string | null
-    stripePricingId?: string | null
+    size?: string
+    specialInstructions?: string
     createdAt?: Date | string
     company: CompanyCreateNestedOneWithoutItemsInput
     orderItems?: OrderItemCreateNestedManyWithoutItemInput
@@ -10921,10 +10945,11 @@ export namespace Prisma {
     companyId: string
     name: string
     description?: string | null
-    price: number
+    price?: number
+    quantity?: number
     currency?: string | null
-    stripeProductId?: string | null
-    stripePricingId?: string | null
+    size?: string
+    specialInstructions?: string
     createdAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutItemInput
   }
@@ -10934,9 +10959,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutItemsNestedInput
     orderItems?: OrderItemUpdateManyWithoutItemNestedInput
@@ -10948,9 +10974,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutItemNestedInput
   }
@@ -10960,10 +10987,11 @@ export namespace Prisma {
     companyId: string
     name: string
     description?: string | null
-    price: number
+    price?: number
+    quantity?: number
     currency?: string | null
-    stripeProductId?: string | null
-    stripePricingId?: string | null
+    size?: string
+    specialInstructions?: string
     createdAt?: Date | string
   }
 
@@ -10972,9 +11000,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10984,9 +11013,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -11599,6 +11629,17 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type CompanyScalarRelationFilter = {
     is?: CompanyWhereInput
     isNot?: CompanyWhereInput
@@ -11620,14 +11661,16 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    quantity?: SortOrder
     currency?: SortOrder
-    stripeProductId?: SortOrder
-    stripePricingId?: SortOrder
+    size?: SortOrder
+    specialInstructions?: SortOrder
     createdAt?: SortOrder
   }
 
   export type MenuItemAvgOrderByAggregateInput = {
     price?: SortOrder
+    quantity?: SortOrder
   }
 
   export type MenuItemMaxOrderByAggregateInput = {
@@ -11636,9 +11679,10 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    quantity?: SortOrder
     currency?: SortOrder
-    stripeProductId?: SortOrder
-    stripePricingId?: SortOrder
+    size?: SortOrder
+    specialInstructions?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11648,14 +11692,16 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    quantity?: SortOrder
     currency?: SortOrder
-    stripeProductId?: SortOrder
-    stripePricingId?: SortOrder
+    size?: SortOrder
+    specialInstructions?: SortOrder
     createdAt?: SortOrder
   }
 
   export type MenuItemSumOrderByAggregateInput = {
     price?: SortOrder
+    quantity?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -11672,6 +11718,22 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type UserNullableScalarRelationFilter = {
@@ -11741,17 +11803,6 @@ export namespace Prisma {
     totalOrderCost?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type OrderScalarRelationFilter = {
     is?: OrderWhereInput
     isNot?: OrderWhereInput
@@ -11808,22 +11859,6 @@ export namespace Prisma {
     quantity?: SortOrder
     pricePerItem?: SortOrder
     totalPrice?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type ReservationCountOrderByAggregateInput = {
@@ -12330,6 +12365,14 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type CompanyUpdateOneRequiredWithoutItemsNestedInput = {
     create?: XOR<CompanyCreateWithoutItemsInput, CompanyUncheckedCreateWithoutItemsInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutItemsInput
@@ -12448,14 +12491,6 @@ export namespace Prisma {
     create?: XOR<MenuItemCreateWithoutOrderItemsInput, MenuItemUncheckedCreateWithoutOrderItemsInput>
     connectOrCreate?: MenuItemCreateOrConnectWithoutOrderItemsInput
     connect?: MenuItemWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type OrderUpdateOneRequiredWithoutOrderItemsNestedInput = {
@@ -13024,10 +13059,11 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
-    price: number
+    price?: number
+    quantity?: number
     currency?: string | null
-    stripeProductId?: string | null
-    stripePricingId?: string | null
+    size?: string
+    specialInstructions?: string
     createdAt?: Date | string
     orderItems?: OrderItemCreateNestedManyWithoutItemInput
   }
@@ -13036,10 +13072,11 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
-    price: number
+    price?: number
+    quantity?: number
     currency?: string | null
-    stripeProductId?: string | null
-    stripePricingId?: string | null
+    size?: string
+    specialInstructions?: string
     createdAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutItemInput
   }
@@ -13233,9 +13270,10 @@ export namespace Prisma {
     name?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     price?: FloatFilter<"MenuItem"> | number
+    quantity?: IntFilter<"MenuItem"> | number
     currency?: StringNullableFilter<"MenuItem"> | string | null
-    stripeProductId?: StringNullableFilter<"MenuItem"> | string | null
-    stripePricingId?: StringNullableFilter<"MenuItem"> | string | null
+    size?: StringFilter<"MenuItem"> | string
+    specialInstructions?: StringFilter<"MenuItem"> | string
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
   }
 
@@ -13717,10 +13755,11 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
-    price: number
+    price?: number
+    quantity?: number
     currency?: string | null
-    stripeProductId?: string | null
-    stripePricingId?: string | null
+    size?: string
+    specialInstructions?: string
     createdAt?: Date | string
     company: CompanyCreateNestedOneWithoutItemsInput
   }
@@ -13730,10 +13769,11 @@ export namespace Prisma {
     companyId: string
     name: string
     description?: string | null
-    price: number
+    price?: number
+    quantity?: number
     currency?: string | null
-    stripeProductId?: string | null
-    stripePricingId?: string | null
+    size?: string
+    specialInstructions?: string
     createdAt?: Date | string
   }
 
@@ -13805,9 +13845,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutItemsNestedInput
   }
@@ -13818,9 +13859,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14282,10 +14324,11 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
-    price: number
+    price?: number
+    quantity?: number
     currency?: string | null
-    stripeProductId?: string | null
-    stripePricingId?: string | null
+    size?: string
+    specialInstructions?: string
     createdAt?: Date | string
   }
 
@@ -14323,9 +14366,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUpdateManyWithoutItemNestedInput
   }
@@ -14335,9 +14379,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutItemNestedInput
   }
@@ -14347,9 +14392,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: FloatFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
     currency?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripePricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: StringFieldUpdateOperationsInput | string
+    specialInstructions?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

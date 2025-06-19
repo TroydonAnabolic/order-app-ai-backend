@@ -148,9 +148,10 @@ exports.Prisma.MenuItemScalarFieldEnum = {
   name: 'name',
   description: 'description',
   price: 'price',
+  quantity: 'quantity',
   currency: 'currency',
-  stripeProductId: 'stripeProductId',
-  stripePricingId: 'stripePricingId',
+  size: 'size',
+  specialInstructions: 'specialInstructions',
   createdAt: 'createdAt'
 };
 

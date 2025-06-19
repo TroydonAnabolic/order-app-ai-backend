@@ -48,17 +48,18 @@ enum UserRole {
 }
 
 model MenuItem {
-  id              String      @id @default(cuid())
-  companyId       String
-  name            String
-  description     String?
-  price           Float
-  currency        String?
-  stripeProductId String?
-  stripePricingId String?
-  createdAt       DateTime    @default(now())
-  company         Company     @relation(fields: [companyId], references: [id])
-  orderItems      OrderItem[]
+  id                  String      @id @default(cuid())
+  companyId           String
+  name                String
+  description         String?
+  price               Float       @default(0.0)
+  quantity            Int         @default(0)
+  currency            String?
+  size                String      @default("Medium")
+  specialInstructions String      @default("No special instructions")
+  createdAt           DateTime    @default(now())
+  company             Company     @relation(fields: [companyId], references: [id])
+  orderItems          OrderItem[]
 }
 
 model Order {

@@ -47,6 +47,7 @@ export async function GET(request: Request) {
             description: true,
             price: true,
             createdAt: true,
+            currency: true,
           },
         },
       },

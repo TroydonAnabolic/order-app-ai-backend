@@ -1,4 +1,5 @@
-import { PrismaClient } from "@/prisma/generated/client";
+import { stripe } from "@/lib/stripe";
+import { MenuItem, PrismaClient } from "@/prisma/generated/client";
 
 export async function POST(request: Request) {
   console.log(
@@ -61,6 +62,24 @@ export async function POST(request: Request) {
       },
     });
 
+    // checkout with stripe
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: items.map((item: MenuItem) => ({
+        price_data: {
+          currency: item.currency ?? "nzd",
+          product_data: {
+            name: item.name as string,
+            description: item.description as string,
+          },
+          unit_amount: Math.round((item.price as number) * 100), // Stripe expects amount in cents
+        },
+        quantity: item.quantity,
+      })),
+      success_url: `order-app://payment/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `order-app://payment/cancel`,
+    });
+
     console.log("Creating order...");
     const totalCost = items.reduce(
       (sum: number, item: any) => sum + item.price * item.quantity,
@@ -83,7 +102,7 @@ export async function POST(request: Request) {
         preferredPickupTime,
         deliveryAddress,
         orderItems: {
-          create: items.map((item: any) => {
+          create: items.map((item: MenuItem) => {
             const mappedItem = {
               item: { connect: { id: item.id } },
               quantity: item.quantity,
