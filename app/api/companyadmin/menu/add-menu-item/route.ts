@@ -62,8 +62,6 @@ export async function POST(request: Request) {
         description,
         price,
         currency,
-        stripeProductId: "stripeProduct.id",
-        stripePricingId: "stripePrice.id",
       },
     });
 
