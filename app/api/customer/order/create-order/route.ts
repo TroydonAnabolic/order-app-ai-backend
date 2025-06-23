@@ -1,5 +1,6 @@
 import { stripe } from "@/lib/stripe";
 import { MenuItem, PrismaClient } from "@/prisma/generated/client";
+import { OrderItem } from "@/types/order";
 
 export async function POST(request: Request) {
   console.log(
@@ -63,22 +64,22 @@ export async function POST(request: Request) {
     });
 
     // checkout with stripe
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      line_items: items.map((item: MenuItem) => ({
-        price_data: {
-          currency: item.currency ?? "nzd",
-          product_data: {
-            name: item.name as string,
-            description: item.description as string,
-          },
-          unit_amount: Math.round((item.price as number) * 100), // Stripe expects amount in cents
-        },
-        quantity: item.quantity,
-      })),
-      success_url: `order-app://payment/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `order-app://payment/cancel`,
-    });
+    // const session = await stripe.checkout.sessions.create({
+    //   mode: "payment",
+    //   line_items: items.map((item: MenuItem) => ({
+    //     price_data: {
+    //       currency: item.currency ?? "nzd",
+    //       product_data: {
+    //         name: item.name as string,
+    //         description: item.description as string,
+    //       },
+    //       unit_amount: Math.round((item.price as number) * 100), // Stripe expects amount in cents
+    //     },
+    //     quantity: item.quantity,
+    //   })),
+    //   success_url: `order-app://payment/success?session_id={CHECKOUT_SESSION_ID}`,
+    //   cancel_url: `order-app://payment/cancel`,
+    // });
 
     console.log("Creating order...");
     const totalCost = items.reduce(
@@ -102,14 +103,14 @@ export async function POST(request: Request) {
         preferredPickupTime,
         deliveryAddress,
         orderItems: {
-          create: items.map((item: MenuItem) => {
+          create: items.map((item: OrderItem) => {
             const mappedItem = {
               item: { connect: { id: item.id } },
               quantity: item.quantity,
-              itemName: item.name,
+              itemName: item.itemName,
               size: item.size,
-              pricePerItem: item.price,
-              totalPrice: item.price * item.quantity!,
+              pricePerItem: item.pricePerItem,
+              totalPrice: item.totalPrice,
               specialInstructions: item.specialInstructions,
             };
             console.log("Mapped order item:", mappedItem);

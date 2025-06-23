@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   console.log("Received message on server:", reqBody);
 
   const prompt = `
-You are a backend assistant AI. Your job is to convert a plain-English order summary into a valid JSON object matching this schema. Avoid filling in any fields that you do not have enough information for, and use empty strings or nulls for those fields.
+You are a backend assistant AI. Your job is to convert a plain-English order summary into a valid JSON object matching this schema. Avoid filling in any fields that you do not have enough information for, and use empty strings or nulls for those fields, please leave all ID fields empty.
 
 Here is the order summary:
 
@@ -93,6 +93,9 @@ Output:
   // use zod to validate the order object
   if (
     !order ||
+    !order.customerName ||
+    !order.phoneNumber ||
+    !order.email ||
     !order.totalOrderCost ||
     !order.orderItems ||
     order.orderItems.length === 0
@@ -100,9 +103,19 @@ Output:
     throw new Error("Invalid order data received from AI.");
   }
 
-  const customer = await stripe.customers.create({
-    apiVersion: "2025-04-30.basil",
+  // first try to find a stripe customer by email
+  const existingCustomer = await stripe.customers.list({
+    email: order.email,
   });
+
+  // use existing customer if found, otherwise create a new one
+  const customer =
+    existingCustomer.data[0] ||
+    (await stripe.customers.create({
+      name: order.customerName!,
+      phone: order.phoneNumber!,
+      email: order.email || undefined,
+    }));
 
   const ephemeralKey = await stripe.ephemeralKeys.create(
     { customer: customer.id },
