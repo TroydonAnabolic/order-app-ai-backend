@@ -29,6 +29,7 @@ interface Order {
   companyId: string;
   customerName: string;
   phoneNumber: string;
+  email: string;
   diningType: string;
   seatNo?: string;
   preferredDiningTime?: string | null;
