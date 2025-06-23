@@ -1,10 +1,8 @@
 // https://docs.stripe.com/payments/accept-a-payment?platform=react-native&ui=payment-sheet
 
 import { ai } from "@/lib/gemini";
-import { stripe } from "@/lib/stripe";
 import { Order, OrderItem } from "@/types/order";
-import { CURRENCY } from "@/util/config";
-import { MenuItem, PrismaClient } from "@/prisma/generated/client";
+import { PrismaClient } from "@/prisma/generated/client";
 
 export async function POST(req: Request) {
   // Use an existing Customer ID if this is a returning customer.
@@ -112,45 +110,44 @@ Output:
     throw new Error("Invalid order data received from AI.");
   }
 
-  console.log("Order data validated, now searching for user...");
-
   try {
-    const user = await prisma.user.findUnique({
-      where: { email: order.email },
-      select: {
-        id: true,
-        givenName: true,
-        familyName: true,
-        phoneNumber: true,
+    // Build the data object for order creation
+    const orderData: any = {
+      customerName: order.customerName,
+      phoneNumber: order.phoneNumber,
+      diningType: order.diningType,
+      seatNo: order.seatNo ?? null,
+      orderDate: new Date(order.orderDate),
+      totalOrderCost: order.totalOrderCost,
+      preferredDiningTime: order.preferredDiningTime ?? null,
+      preferredDeliveryTime: order.preferredDeliveryTime ?? null,
+      preferredPickupTime: order.preferredPickupTime ?? null,
+      deliveryAddress: order.deliveryAddress ?? "",
+      specialInstructions: order.specialInstructions ?? "",
+      orderItems: {
+        create: order.orderItems.map((item: OrderItem) => ({
+          itemName: item.itemName,
+          size: item.size,
+          quantity: item.quantity,
+          pricePerItem: item.pricePerItem,
+          totalPrice: item.totalPrice,
+          specialInstructions: item.specialInstructions ?? "",
+        })),
       },
-    });
+    };
+
+    // Only connect user if email is defined and not empty
+    if (order.email && order.email.trim() !== "") {
+      orderData.user = { connect: { email: order.email } };
+    }
+
+    // Only connect company if companyId is defined and not empty
+    if (order.companyId && order.companyId.trim() !== "") {
+      orderData.company = { connect: { id: order.companyId } };
+    }
 
     const createdOrder = await prisma.order.create({
-      data: {
-        user: { connect: { id: user?.id } },
-        company: { connect: { id: order.companyId } },
-        customerName: order.customerName,
-        phoneNumber: order.phoneNumber,
-        diningType: order.diningType,
-        seatNo: order.seatNo ?? null,
-        orderDate: new Date(order.orderDate),
-        totalOrderCost: order.totalOrderCost,
-        preferredDiningTime: order.preferredDiningTime ?? null,
-        preferredDeliveryTime: order.preferredDeliveryTime ?? null,
-        preferredPickupTime: order.preferredPickupTime ?? null,
-        deliveryAddress: order.deliveryAddress ?? "",
-        specialInstructions: order.specialInstructions ?? "",
-        orderItems: {
-          create: order.orderItems.map((item: OrderItem) => ({
-            itemName: item.itemName,
-            size: item.size,
-            quantity: item.quantity,
-            pricePerItem: item.pricePerItem,
-            totalPrice: item.totalPrice,
-            specialInstructions: item.specialInstructions ?? "",
-          })),
-        },
-      },
+      data: orderData,
     });
 
     console.log("Order created successfully:", createdOrder.id);
