@@ -96,7 +96,6 @@ Output:
     !order ||
     !order.customerName ||
     !order.phoneNumber ||
-    !order.email ||
     !order.totalOrderCost ||
     !order.orderItems ||
     order.orderItems.length === 0
