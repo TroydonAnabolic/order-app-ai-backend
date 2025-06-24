@@ -117,7 +117,7 @@ Output:
       phoneNumber: order.phoneNumber,
       diningType: order.diningType,
       seatNo: order.seatNo ?? null,
-      orderDate: order.orderDate ? new Date(order.orderDate) : new Date(),
+      orderDate: new Date(),
       totalOrderCost: order.totalOrderCost,
       preferredDiningTime: order.preferredDiningTime ?? null,
       preferredDeliveryTime: order.preferredDeliveryTime ?? null,
