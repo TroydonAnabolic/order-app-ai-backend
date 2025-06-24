@@ -103,25 +103,43 @@ Output:
     throw new Error("Invalid order data received from AI.");
   }
 
-  // first try to find a stripe customer by email
-  const existingCustomer = await stripe.customers.list({
-    email: order.email,
-  });
+  // Only try to find or create a Stripe customer if an email is provided
+  let customer = null;
+  let ephemeralKey = null;
 
-  // use existing customer if found, otherwise create a new one
-  const customer =
-    existingCustomer.data[0] ||
-    (await stripe.customers.create({
-      name: order.customerName!,
-      phone: order.phoneNumber!,
-      email: order.email || undefined,
-    }));
+  if (order.email) {
+    // first try to find a stripe customer by email
+    const existingCustomer = await stripe.customers.list({
+      email: order.email,
+    });
 
-  const ephemeralKey = await stripe.ephemeralKeys.create(
-    { customer: customer.id },
-    { apiVersion: "2025-04-30.basil" }
-  );
+    // use existing customer if found, otherwise create a new one
+    customer =
+      existingCustomer.data[0] ||
+      (await stripe.customers.create({
+        name: order.customerName!,
+        phone: order.phoneNumber!,
+        email: order.email,
+      }));
 
+    ephemeralKey = await stripe.ephemeralKeys.create(
+      { customer: customer.id },
+      { apiVersion: "2025-04-30.basil" }
+    );
+  }
+
+  const paymentIntentData: any = {
+    amount: Math.floor(order.totalOrderCost * 100),
+    currency: CURRENCY,
+    automatic_payment_methods: { enabled: true },
+  };
+
+  if (customer) {
+    // Only attach customer if one was found/created
+    paymentIntentData.customer = customer.id;
+  }
+
+  const paymentIntent = await stripe.paymentIntents.create(paymentIntentData);
   //   const session = await stripe.checkout.sessions.create({
   //     payment_method_types: ["card"],
   //     mode: "payment",
@@ -143,23 +161,10 @@ Output:
   //   });
   // TODO: Uncomment the following code to create a Checkout Session instead of a Payment Intent
 
-  const paymentIntentData: any = {
-    amount: Math.floor(order.totalOrderCost * 100),
-    currency: CURRENCY,
-    automatic_payment_methods: { enabled: true },
-  };
-
-  if (order.email) {
-    // Only attach customer if you have a unique identifier
-    paymentIntentData.customer = customer.id;
-  }
-
-  const paymentIntent = await stripe.paymentIntents.create(paymentIntentData);
-
   return Response.json({
     paymentIntent: paymentIntent.client_secret,
-    ephemeralKey: ephemeralKey.secret,
-    customer: customer.id,
+    ephemeralKey: ephemeralKey ? ephemeralKey.secret : null,
+    customer: customer ? customer.id : null,
     publishableKey: process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY,
   });
 }
