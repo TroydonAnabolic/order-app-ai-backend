@@ -141,26 +141,20 @@ Output:
   //     success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success`,
   //     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/cancel`,
   //   });
-
-  //   return Response.json({
-  //     sessionId: session.url,
-  //     ephemeralKey: ephemeralKey.secret,
-  //     customer: customer.id,
-  //     publishableKey: process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-  //   });
-
   // TODO: Uncomment the following code to create a Checkout Session instead of a Payment Intent
 
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: Math.floor(order.totalOrderCost * 100), // Convert to cents
+  const paymentIntentData: any = {
+    amount: Math.floor(order.totalOrderCost * 100),
     currency: CURRENCY,
-    customer: customer.id,
-    // In the latest version of the API, specifying the `automatic_payment_methods` parameter
-    // is optional because Stripe enables its functionality by default.
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
+    automatic_payment_methods: { enabled: true },
+  };
+
+  if (order.email) {
+    // Only attach customer if you have a unique identifier
+    paymentIntentData.customer = customer.id;
+  }
+
+  const paymentIntent = await stripe.paymentIntents.create(paymentIntentData);
 
   return Response.json({
     paymentIntent: paymentIntent.client_secret,
