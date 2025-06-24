@@ -4,6 +4,7 @@ import { ai } from "@/lib/gemini";
 import { stripe } from "@/lib/stripe";
 import { Order } from "@/types/order";
 import { CURRENCY } from "@/util/config";
+import Stripe from "stripe";
 
 export async function POST(req: Request) {
   // Use an existing Customer ID if this is a returning customer.
@@ -104,18 +105,20 @@ Output:
   }
 
   // Only try to find or create a Stripe customer if an email is provided
-  let customer = null;
+  let customer: Stripe.Customer | null = null;
   let ephemeralKey = null;
 
   if (order.email) {
     // first try to find a stripe customer by email
-    const existingCustomer = await stripe.customers.list({
+    const existingCustomers = await stripe.customers.list({
       email: order.email,
     });
 
+    const existingCustomer = existingCustomers.data[0];
+
     // use existing customer if found, otherwise create a new one
     customer =
-      existingCustomer.data[0] ||
+      existingCustomer ||
       (await stripe.customers.create({
         name: order.customerName!,
         phone: order.phoneNumber!,
@@ -164,7 +167,7 @@ Output:
   return Response.json({
     paymentIntent: paymentIntent.client_secret,
     ephemeralKey: ephemeralKey ? ephemeralKey.secret : null,
-    customer: customer ? customer.id : null,
+    customer: customer ? customer : null,
     publishableKey: process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY,
   });
 }
