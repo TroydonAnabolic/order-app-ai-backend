@@ -3,9 +3,9 @@
 import { ai } from "@/lib/gemini";
 import { stripe } from "@/lib/stripe";
 import { Order } from "@/types/order";
-import { CURRENCY } from "@/util/config";
 import Stripe from "stripe";
-
+import { PrismaClient } from "@/prisma/generated/client";
+import { CURRENCY } from "@/util/config";
 export async function POST(req: Request) {
   // Use an existing Customer ID if this is a returning customer.
   const reqBody = await req.json();
@@ -131,9 +131,23 @@ Output:
     );
   }
 
+  const prisma = new PrismaClient({
+    datasources: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
+  });
+
+  // get the currency from the company by using prisma, or use the default
+  const company = await prisma.company.findUnique({
+    where: { id: order.companyId },
+  });
+  const currency = company?.currency || CURRENCY; // Default to NZD if not set
+
   const paymentIntentData: any = {
     amount: Math.floor(order.totalOrderCost * 100),
-    currency: CURRENCY,
+    currency: currency.toLowerCase(),
     automatic_payment_methods: { enabled: true },
   };
 

@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   });
 
   const prompt = `
-You are a backend assistant AI. Your job is to convert a plain-English order summary into a valid JSON object matching this schema. Avoid filling in any fields that you do not have enough information for, and use empty strings or nulls for those fields, please leave ID fields empty.
+You are a backend assistant AI. Your job is to convert a plain-English order summary into a valid JSON object matching this schema. Avoid filling in any fields that you do not have enough information for, and use empty strings or nulls for those fields, please leave ID fields empty, leave date fields untouched if nothing provided.
 
 Here is the order summary:
 
@@ -117,7 +117,7 @@ Output:
       phoneNumber: order.phoneNumber,
       diningType: order.diningType,
       seatNo: order.seatNo ?? null,
-      orderDate: new Date(order.orderDate),
+      orderDate: order.orderDate ? new Date(order.orderDate) : new Date(),
       totalOrderCost: order.totalOrderCost,
       preferredDiningTime: order.preferredDiningTime ?? null,
       preferredDeliveryTime: order.preferredDeliveryTime ?? null,
