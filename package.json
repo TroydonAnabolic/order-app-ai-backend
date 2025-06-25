@@ -13,6 +13,7 @@
   "dependencies": {
     "@google/genai": "^1.6.0",
     "@prisma/client": "^6.9.0",
+    "@sendgrid/mail": "^8.1.5",
     "next": "15.3.3",
     "stripe": "^18.2.1"
   },
