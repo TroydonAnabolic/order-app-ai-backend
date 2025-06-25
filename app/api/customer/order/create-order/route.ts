@@ -1,6 +1,7 @@
 import { stripe } from "@/lib/stripe";
 import { MenuItem, PrismaClient } from "@/prisma/generated/client";
 import { OrderItem } from "@/types/order";
+import { generateUniqueOrderShortCode } from "@/util/shortCode";
 
 export async function POST(request: Request) {
   console.log(
@@ -87,12 +88,13 @@ export async function POST(request: Request) {
       0
     );
     console.log("Total order cost calculated:", totalCost);
-
+    const shortCode = await generateUniqueOrderShortCode(prisma);
     const order = await prisma.order.create({
       data: {
         user: { connect: { id: user?.id } },
         company: { connect: { id: companyId } },
         customerName: `${user?.givenName} ${user?.familyName}`,
+        shortCode: shortCode,
         phoneNumber: user?.phoneNumber || "",
         diningType,
         seatNo: seatNo ?? null,
