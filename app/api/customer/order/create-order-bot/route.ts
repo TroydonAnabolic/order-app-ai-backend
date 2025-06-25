@@ -2,14 +2,21 @@
 
 import { Order, OrderItem } from "@/types/order";
 import { PrismaClient } from "@/prisma/generated/client";
+import { Reservation } from "@/types/reservation";
 
 export async function POST(req: Request) {
   // Use an existing Customer ID if this is a returning customer.
   const {
     order,
+    reservation,
     email,
     companyId,
-  }: { order: Order; email: string; companyId: string } = await req.json();
+  }: {
+    order: Order;
+    reservation: Reservation;
+    email: string;
+    companyId: string;
+  } = await req.json();
 
   console.log("Received create ordermessage on server:", order);
 
@@ -58,18 +65,37 @@ export async function POST(req: Request) {
       },
     };
 
+    const reservationData: any = {
+      companyId: companyId,
+      name: reservation.name,
+      phoneNumber: reservation.phoneNumber,
+      diningDate: new Date(reservation.diningDate),
+      preferredTime: reservation.preferredTime,
+      seatNumbers: reservation.seatNumbers ?? "",
+      specialInstructions: reservation.specialInstructions ?? "",
+      createdAt: reservation.createdAt
+        ? new Date(reservation.createdAt)
+        : new Date(),
+    };
+
     // Only connect user if email is defined and not empty
     if (email && email.trim() !== "") {
       orderData.user = { connect: { email: email } };
+      reservationData.user = { connect: { email: email } };
     }
 
     // Only connect company if companyId is defined and not empty
     if (companyId && companyId.trim() !== "") {
       orderData.company = { connect: { id: companyId } };
+      reservationData.company = { connect: { id: companyId } };
     }
 
     const createdOrder = await prisma.order.create({
       data: orderData,
+    });
+
+    const createdReservation = await prisma.reservation.create({
+      data: reservationData,
     });
 
     // send email to the customer if email is provided
@@ -93,6 +119,7 @@ export async function POST(req: Request) {
     // }
 
     console.log("Order created successfully:", createdOrder.id);
+    console.log("Reservation created successfully:", createdReservation.id);
     return new Response(JSON.stringify(createdOrder), { status: 201 });
   } catch (error) {
     console.error("Error during order processing:", error);
