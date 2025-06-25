@@ -3,6 +3,7 @@
 import { Order, OrderItem } from "@/types/order";
 import { PrismaClient } from "@/prisma/generated/client";
 import { Reservation } from "@/types/reservation";
+import { generateUniqueOrderShortCode } from "@/util/shortCode";
 
 export async function POST(req: Request) {
   // Use an existing Customer ID if this is a returning customer.
@@ -41,7 +42,10 @@ export async function POST(req: Request) {
 
   try {
     // Build the data object for order creation
+    const shortCode = await generateUniqueOrderShortCode(prisma);
+
     const orderData: any = {
+      shortCode: shortCode,
       customerName: order.customerName,
       phoneNumber: order.phoneNumber,
       diningType: order.diningType,
@@ -119,7 +123,13 @@ export async function POST(req: Request) {
 
     console.log("Order created successfully:", createdOrder.id);
     console.log("Reservation created successfully:", createdReservation.id);
-    return new Response(JSON.stringify(createdOrder), { status: 201 });
+    return new Response(
+      JSON.stringify({
+        order: createdOrder,
+        reservation: createdReservation,
+      }),
+      { status: 201 }
+    );
   } catch (error) {
     console.error("Error during order processing:", error);
     return new Response(JSON.stringify({ error: "Failed to process order" }), {

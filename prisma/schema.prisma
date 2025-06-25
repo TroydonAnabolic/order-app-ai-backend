@@ -63,6 +63,7 @@ model MenuItem {
 
 model Order {
   id                        String      @id @default(cuid())
+  shortCode                 String      @unique // 4-digit unique code managed by your app
   userId                    String?
   companyId                 String
   customerName              String

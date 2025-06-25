@@ -5264,6 +5264,7 @@ export namespace Prisma {
 
   export type OrderMinAggregateOutputType = {
     id: string | null
+    shortCode: string | null
     userId: string | null
     companyId: string | null
     customerName: string | null
@@ -5282,6 +5283,7 @@ export namespace Prisma {
 
   export type OrderMaxAggregateOutputType = {
     id: string | null
+    shortCode: string | null
     userId: string | null
     companyId: string | null
     customerName: string | null
@@ -5300,6 +5302,7 @@ export namespace Prisma {
 
   export type OrderCountAggregateOutputType = {
     id: number
+    shortCode: number
     userId: number
     companyId: number
     customerName: number
@@ -5328,6 +5331,7 @@ export namespace Prisma {
 
   export type OrderMinAggregateInputType = {
     id?: true
+    shortCode?: true
     userId?: true
     companyId?: true
     customerName?: true
@@ -5346,6 +5350,7 @@ export namespace Prisma {
 
   export type OrderMaxAggregateInputType = {
     id?: true
+    shortCode?: true
     userId?: true
     companyId?: true
     customerName?: true
@@ -5364,6 +5369,7 @@ export namespace Prisma {
 
   export type OrderCountAggregateInputType = {
     id?: true
+    shortCode?: true
     userId?: true
     companyId?: true
     customerName?: true
@@ -5469,6 +5475,7 @@ export namespace Prisma {
 
   export type OrderGroupByOutputType = {
     id: string
+    shortCode: string
     userId: string | null
     companyId: string
     customerName: string
@@ -5506,6 +5513,7 @@ export namespace Prisma {
 
   export type OrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    shortCode?: boolean
     userId?: boolean
     companyId?: boolean
     customerName?: boolean
@@ -5528,6 +5536,7 @@ export namespace Prisma {
 
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    shortCode?: boolean
     userId?: boolean
     companyId?: boolean
     customerName?: boolean
@@ -5548,6 +5557,7 @@ export namespace Prisma {
 
   export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    shortCode?: boolean
     userId?: boolean
     companyId?: boolean
     customerName?: boolean
@@ -5568,6 +5578,7 @@ export namespace Prisma {
 
   export type OrderSelectScalar = {
     id?: boolean
+    shortCode?: boolean
     userId?: boolean
     companyId?: boolean
     customerName?: boolean
@@ -5584,7 +5595,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "companyId" | "customerName" | "phoneNumber" | "diningType" | "seatNo" | "preferredDiningTime" | "preferredDeliveryTime" | "preferredPickupTime" | "deliveryAddress" | "totalOrderCost" | "specialInstructions" | "orderDate" | "createdAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shortCode" | "userId" | "companyId" | "customerName" | "phoneNumber" | "diningType" | "seatNo" | "preferredDiningTime" | "preferredDeliveryTime" | "preferredPickupTime" | "deliveryAddress" | "totalOrderCost" | "specialInstructions" | "orderDate" | "createdAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Order$userArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -5609,6 +5620,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      shortCode: string
       userId: string | null
       companyId: string
       customerName: string
@@ -6050,6 +6062,7 @@ export namespace Prisma {
    */
   interface OrderFieldRefs {
     readonly id: FieldRef<"Order", 'String'>
+    readonly shortCode: FieldRef<"Order", 'String'>
     readonly userId: FieldRef<"Order", 'String'>
     readonly companyId: FieldRef<"Order", 'String'>
     readonly customerName: FieldRef<"Order", 'String'>
@@ -9987,6 +10000,7 @@ export namespace Prisma {
 
   export const OrderScalarFieldEnum: {
     id: 'id',
+    shortCode: 'shortCode',
     userId: 'userId',
     companyId: 'companyId',
     customerName: 'customerName',
@@ -10411,6 +10425,7 @@ export namespace Prisma {
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     id?: StringFilter<"Order"> | string
+    shortCode?: StringFilter<"Order"> | string
     userId?: StringNullableFilter<"Order"> | string | null
     companyId?: StringFilter<"Order"> | string
     customerName?: StringFilter<"Order"> | string
@@ -10432,6 +10447,7 @@ export namespace Prisma {
 
   export type OrderOrderByWithRelationInput = {
     id?: SortOrder
+    shortCode?: SortOrder
     userId?: SortOrderInput | SortOrder
     companyId?: SortOrder
     customerName?: SortOrder
@@ -10453,6 +10469,7 @@ export namespace Prisma {
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    shortCode?: string
     AND?: OrderWhereInput | OrderWhereInput[]
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
@@ -10473,10 +10490,11 @@ export namespace Prisma {
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     orderItems?: OrderItemListRelationFilter
-  }, "id">
+  }, "id" | "shortCode">
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder
+    shortCode?: SortOrder
     userId?: SortOrderInput | SortOrder
     companyId?: SortOrder
     customerName?: SortOrder
@@ -10503,6 +10521,7 @@ export namespace Prisma {
     OR?: OrderScalarWhereWithAggregatesInput[]
     NOT?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Order"> | string
+    shortCode?: StringWithAggregatesFilter<"Order"> | string
     userId?: StringNullableWithAggregatesFilter<"Order"> | string | null
     companyId?: StringWithAggregatesFilter<"Order"> | string
     customerName?: StringWithAggregatesFilter<"Order"> | string
@@ -11022,6 +11041,7 @@ export namespace Prisma {
 
   export type OrderCreateInput = {
     id?: string
+    shortCode: string
     customerName: string
     phoneNumber: string
     diningType: string
@@ -11041,6 +11061,7 @@ export namespace Prisma {
 
   export type OrderUncheckedCreateInput = {
     id?: string
+    shortCode: string
     userId?: string | null
     companyId: string
     customerName: string
@@ -11060,6 +11081,7 @@ export namespace Prisma {
 
   export type OrderUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
@@ -11079,6 +11101,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
@@ -11098,6 +11121,7 @@ export namespace Prisma {
 
   export type OrderCreateManyInput = {
     id?: string
+    shortCode: string
     userId?: string | null
     companyId: string
     customerName: string
@@ -11116,6 +11140,7 @@ export namespace Prisma {
 
   export type OrderUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
@@ -11132,6 +11157,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
@@ -11743,6 +11769,7 @@ export namespace Prisma {
 
   export type OrderCountOrderByAggregateInput = {
     id?: SortOrder
+    shortCode?: SortOrder
     userId?: SortOrder
     companyId?: SortOrder
     customerName?: SortOrder
@@ -11765,6 +11792,7 @@ export namespace Prisma {
 
   export type OrderMaxOrderByAggregateInput = {
     id?: SortOrder
+    shortCode?: SortOrder
     userId?: SortOrder
     companyId?: SortOrder
     customerName?: SortOrder
@@ -11783,6 +11811,7 @@ export namespace Prisma {
 
   export type OrderMinOrderByAggregateInput = {
     id?: SortOrder
+    shortCode?: SortOrder
     userId?: SortOrder
     companyId?: SortOrder
     customerName?: SortOrder
@@ -12812,6 +12841,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutUserInput = {
     id?: string
+    shortCode: string
     customerName: string
     phoneNumber: string
     diningType: string
@@ -12830,6 +12860,7 @@ export namespace Prisma {
 
   export type OrderUncheckedCreateWithoutUserInput = {
     id?: string
+    shortCode: string
     companyId: string
     customerName: string
     phoneNumber: string
@@ -12980,6 +13011,7 @@ export namespace Prisma {
     OR?: OrderScalarWhereInput[]
     NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
     id?: StringFilter<"Order"> | string
+    shortCode?: StringFilter<"Order"> | string
     userId?: StringNullableFilter<"Order"> | string | null
     companyId?: StringFilter<"Order"> | string
     customerName?: StringFilter<"Order"> | string
@@ -13093,6 +13125,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutCompanyInput = {
     id?: string
+    shortCode: string
     customerName: string
     phoneNumber: string
     diningType: string
@@ -13111,6 +13144,7 @@ export namespace Prisma {
 
   export type OrderUncheckedCreateWithoutCompanyInput = {
     id?: string
+    shortCode: string
     userId?: string | null
     customerName: string
     phoneNumber: string
@@ -13712,6 +13746,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutOrderItemsInput = {
     id?: string
+    shortCode: string
     customerName: string
     phoneNumber: string
     diningType: string
@@ -13730,6 +13765,7 @@ export namespace Prisma {
 
   export type OrderUncheckedCreateWithoutOrderItemsInput = {
     id?: string
+    shortCode: string
     userId?: string | null
     companyId: string
     customerName: string
@@ -13795,6 +13831,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
@@ -13813,6 +13850,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
@@ -14105,6 +14143,7 @@ export namespace Prisma {
 
   export type OrderCreateManyUserInput = {
     id?: string
+    shortCode: string
     companyId: string
     customerName: string
     phoneNumber: string
@@ -14212,6 +14251,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
@@ -14230,6 +14270,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -14248,6 +14289,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -14334,6 +14376,7 @@ export namespace Prisma {
 
   export type OrderCreateManyCompanyInput = {
     id?: string
+    shortCode: string
     userId?: string | null
     customerName: string
     phoneNumber: string
@@ -14401,6 +14444,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
@@ -14419,6 +14463,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -14437,6 +14482,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     customerName?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string

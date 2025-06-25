@@ -4,6 +4,7 @@ import { User } from "./user";
 
 export interface Order {
   id: string;
+  shortCode: string;
   userId?: string;
   companyId: string;
   customerName: string;
