@@ -44,6 +44,8 @@ export async function POST(req: Request) {
     // Build the data object for order creation
     const shortCode = await generateUniqueOrderShortCode(prisma);
 
+    console.log("Generated short code:", shortCode);
+
     const orderData: any = {
       shortCode: shortCode,
       customerName: order.customerName,
