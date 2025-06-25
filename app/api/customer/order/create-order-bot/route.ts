@@ -66,7 +66,6 @@ export async function POST(req: Request) {
     };
 
     const reservationData: any = {
-      companyId: companyId,
       name: reservation.name,
       phoneNumber: reservation.phoneNumber,
       diningDate: new Date(reservation.diningDate),
