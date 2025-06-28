@@ -1,5 +1,6 @@
 export type Reservation = {
   id?: string;
+  shortCode?: string;
   companyId?: string;
   userId?: string;
   name: string;

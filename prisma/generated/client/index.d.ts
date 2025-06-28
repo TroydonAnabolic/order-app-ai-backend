@@ -5271,6 +5271,7 @@ export namespace Prisma {
     phoneNumber: string | null
     diningType: string | null
     seatNo: string | null
+    preferredDiningDate: string | null
     preferredDiningTime: string | null
     preferredDeliveryTime: string | null
     preferredPickupTime: string | null
@@ -5290,6 +5291,7 @@ export namespace Prisma {
     phoneNumber: string | null
     diningType: string | null
     seatNo: string | null
+    preferredDiningDate: string | null
     preferredDiningTime: string | null
     preferredDeliveryTime: string | null
     preferredPickupTime: string | null
@@ -5309,6 +5311,7 @@ export namespace Prisma {
     phoneNumber: number
     diningType: number
     seatNo: number
+    preferredDiningDate: number
     preferredDiningTime: number
     preferredDeliveryTime: number
     preferredPickupTime: number
@@ -5338,6 +5341,7 @@ export namespace Prisma {
     phoneNumber?: true
     diningType?: true
     seatNo?: true
+    preferredDiningDate?: true
     preferredDiningTime?: true
     preferredDeliveryTime?: true
     preferredPickupTime?: true
@@ -5357,6 +5361,7 @@ export namespace Prisma {
     phoneNumber?: true
     diningType?: true
     seatNo?: true
+    preferredDiningDate?: true
     preferredDiningTime?: true
     preferredDeliveryTime?: true
     preferredPickupTime?: true
@@ -5376,6 +5381,7 @@ export namespace Prisma {
     phoneNumber?: true
     diningType?: true
     seatNo?: true
+    preferredDiningDate?: true
     preferredDiningTime?: true
     preferredDeliveryTime?: true
     preferredPickupTime?: true
@@ -5482,6 +5488,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo: string | null
+    preferredDiningDate: string | null
     preferredDiningTime: string | null
     preferredDeliveryTime: string | null
     preferredPickupTime: string | null
@@ -5520,6 +5527,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     diningType?: boolean
     seatNo?: boolean
+    preferredDiningDate?: boolean
     preferredDiningTime?: boolean
     preferredDeliveryTime?: boolean
     preferredPickupTime?: boolean
@@ -5543,6 +5551,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     diningType?: boolean
     seatNo?: boolean
+    preferredDiningDate?: boolean
     preferredDiningTime?: boolean
     preferredDeliveryTime?: boolean
     preferredPickupTime?: boolean
@@ -5564,6 +5573,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     diningType?: boolean
     seatNo?: boolean
+    preferredDiningDate?: boolean
     preferredDiningTime?: boolean
     preferredDeliveryTime?: boolean
     preferredPickupTime?: boolean
@@ -5585,6 +5595,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     diningType?: boolean
     seatNo?: boolean
+    preferredDiningDate?: boolean
     preferredDiningTime?: boolean
     preferredDeliveryTime?: boolean
     preferredPickupTime?: boolean
@@ -5595,7 +5606,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shortCode" | "userId" | "companyId" | "customerName" | "phoneNumber" | "diningType" | "seatNo" | "preferredDiningTime" | "preferredDeliveryTime" | "preferredPickupTime" | "deliveryAddress" | "totalOrderCost" | "specialInstructions" | "orderDate" | "createdAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shortCode" | "userId" | "companyId" | "customerName" | "phoneNumber" | "diningType" | "seatNo" | "preferredDiningDate" | "preferredDiningTime" | "preferredDeliveryTime" | "preferredPickupTime" | "deliveryAddress" | "totalOrderCost" | "specialInstructions" | "orderDate" | "createdAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Order$userArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -5627,6 +5638,7 @@ export namespace Prisma {
       phoneNumber: string
       diningType: string
       seatNo: string | null
+      preferredDiningDate: string | null
       preferredDiningTime: string | null
       preferredDeliveryTime: string | null
       preferredPickupTime: string | null
@@ -6069,6 +6081,7 @@ export namespace Prisma {
     readonly phoneNumber: FieldRef<"Order", 'String'>
     readonly diningType: FieldRef<"Order", 'String'>
     readonly seatNo: FieldRef<"Order", 'String'>
+    readonly preferredDiningDate: FieldRef<"Order", 'String'>
     readonly preferredDiningTime: FieldRef<"Order", 'String'>
     readonly preferredDeliveryTime: FieldRef<"Order", 'String'>
     readonly preferredPickupTime: FieldRef<"Order", 'String'>
@@ -7727,6 +7740,7 @@ export namespace Prisma {
     id: string | null
     companyId: string | null
     userId: string | null
+    shortCode: string | null
     name: string | null
     phoneNumber: string | null
     diningDate: Date | null
@@ -7740,6 +7754,7 @@ export namespace Prisma {
     id: string | null
     companyId: string | null
     userId: string | null
+    shortCode: string | null
     name: string | null
     phoneNumber: string | null
     diningDate: Date | null
@@ -7753,6 +7768,7 @@ export namespace Prisma {
     id: number
     companyId: number
     userId: number
+    shortCode: number
     name: number
     phoneNumber: number
     diningDate: number
@@ -7768,6 +7784,7 @@ export namespace Prisma {
     id?: true
     companyId?: true
     userId?: true
+    shortCode?: true
     name?: true
     phoneNumber?: true
     diningDate?: true
@@ -7781,6 +7798,7 @@ export namespace Prisma {
     id?: true
     companyId?: true
     userId?: true
+    shortCode?: true
     name?: true
     phoneNumber?: true
     diningDate?: true
@@ -7794,6 +7812,7 @@ export namespace Prisma {
     id?: true
     companyId?: true
     userId?: true
+    shortCode?: true
     name?: true
     phoneNumber?: true
     diningDate?: true
@@ -7880,6 +7899,7 @@ export namespace Prisma {
     id: string
     companyId: string
     userId: string | null
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date
@@ -7910,6 +7930,7 @@ export namespace Prisma {
     id?: boolean
     companyId?: boolean
     userId?: boolean
+    shortCode?: boolean
     name?: boolean
     phoneNumber?: boolean
     diningDate?: boolean
@@ -7925,6 +7946,7 @@ export namespace Prisma {
     id?: boolean
     companyId?: boolean
     userId?: boolean
+    shortCode?: boolean
     name?: boolean
     phoneNumber?: boolean
     diningDate?: boolean
@@ -7940,6 +7962,7 @@ export namespace Prisma {
     id?: boolean
     companyId?: boolean
     userId?: boolean
+    shortCode?: boolean
     name?: boolean
     phoneNumber?: boolean
     diningDate?: boolean
@@ -7955,6 +7978,7 @@ export namespace Prisma {
     id?: boolean
     companyId?: boolean
     userId?: boolean
+    shortCode?: boolean
     name?: boolean
     phoneNumber?: boolean
     diningDate?: boolean
@@ -7964,7 +7988,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyId" | "userId" | "name" | "phoneNumber" | "diningDate" | "preferredTime" | "seatNumbers" | "specialInstructions" | "createdAt", ExtArgs["result"]["reservation"]>
+  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyId" | "userId" | "shortCode" | "name" | "phoneNumber" | "diningDate" | "preferredTime" | "seatNumbers" | "specialInstructions" | "createdAt", ExtArgs["result"]["reservation"]>
   export type ReservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     user?: boolean | Reservation$userArgs<ExtArgs>
@@ -7988,6 +8012,7 @@ export namespace Prisma {
       id: string
       companyId: string
       userId: string | null
+      shortCode: string
       name: string
       phoneNumber: string
       diningDate: Date
@@ -8423,6 +8448,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Reservation", 'String'>
     readonly companyId: FieldRef<"Reservation", 'String'>
     readonly userId: FieldRef<"Reservation", 'String'>
+    readonly shortCode: FieldRef<"Reservation", 'String'>
     readonly name: FieldRef<"Reservation", 'String'>
     readonly phoneNumber: FieldRef<"Reservation", 'String'>
     readonly diningDate: FieldRef<"Reservation", 'DateTime'>
@@ -10007,6 +10033,7 @@ export namespace Prisma {
     phoneNumber: 'phoneNumber',
     diningType: 'diningType',
     seatNo: 'seatNo',
+    preferredDiningDate: 'preferredDiningDate',
     preferredDiningTime: 'preferredDiningTime',
     preferredDeliveryTime: 'preferredDeliveryTime',
     preferredPickupTime: 'preferredPickupTime',
@@ -10039,6 +10066,7 @@ export namespace Prisma {
     id: 'id',
     companyId: 'companyId',
     userId: 'userId',
+    shortCode: 'shortCode',
     name: 'name',
     phoneNumber: 'phoneNumber',
     diningDate: 'diningDate',
@@ -10432,6 +10460,7 @@ export namespace Prisma {
     phoneNumber?: StringFilter<"Order"> | string
     diningType?: StringFilter<"Order"> | string
     seatNo?: StringNullableFilter<"Order"> | string | null
+    preferredDiningDate?: StringNullableFilter<"Order"> | string | null
     preferredDiningTime?: StringNullableFilter<"Order"> | string | null
     preferredDeliveryTime?: StringNullableFilter<"Order"> | string | null
     preferredPickupTime?: StringNullableFilter<"Order"> | string | null
@@ -10454,6 +10483,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     diningType?: SortOrder
     seatNo?: SortOrderInput | SortOrder
+    preferredDiningDate?: SortOrderInput | SortOrder
     preferredDiningTime?: SortOrderInput | SortOrder
     preferredDeliveryTime?: SortOrderInput | SortOrder
     preferredPickupTime?: SortOrderInput | SortOrder
@@ -10479,6 +10509,7 @@ export namespace Prisma {
     phoneNumber?: StringFilter<"Order"> | string
     diningType?: StringFilter<"Order"> | string
     seatNo?: StringNullableFilter<"Order"> | string | null
+    preferredDiningDate?: StringNullableFilter<"Order"> | string | null
     preferredDiningTime?: StringNullableFilter<"Order"> | string | null
     preferredDeliveryTime?: StringNullableFilter<"Order"> | string | null
     preferredPickupTime?: StringNullableFilter<"Order"> | string | null
@@ -10501,6 +10532,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     diningType?: SortOrder
     seatNo?: SortOrderInput | SortOrder
+    preferredDiningDate?: SortOrderInput | SortOrder
     preferredDiningTime?: SortOrderInput | SortOrder
     preferredDeliveryTime?: SortOrderInput | SortOrder
     preferredPickupTime?: SortOrderInput | SortOrder
@@ -10528,6 +10560,7 @@ export namespace Prisma {
     phoneNumber?: StringWithAggregatesFilter<"Order"> | string
     diningType?: StringWithAggregatesFilter<"Order"> | string
     seatNo?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    preferredDiningDate?: StringNullableWithAggregatesFilter<"Order"> | string | null
     preferredDiningTime?: StringNullableWithAggregatesFilter<"Order"> | string | null
     preferredDeliveryTime?: StringNullableWithAggregatesFilter<"Order"> | string | null
     preferredPickupTime?: StringNullableWithAggregatesFilter<"Order"> | string | null
@@ -10625,6 +10658,7 @@ export namespace Prisma {
     id?: StringFilter<"Reservation"> | string
     companyId?: StringFilter<"Reservation"> | string
     userId?: StringNullableFilter<"Reservation"> | string | null
+    shortCode?: StringFilter<"Reservation"> | string
     name?: StringFilter<"Reservation"> | string
     phoneNumber?: StringFilter<"Reservation"> | string
     diningDate?: DateTimeFilter<"Reservation"> | Date | string
@@ -10640,6 +10674,7 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     userId?: SortOrderInput | SortOrder
+    shortCode?: SortOrder
     name?: SortOrder
     phoneNumber?: SortOrder
     diningDate?: SortOrder
@@ -10653,6 +10688,7 @@ export namespace Prisma {
 
   export type ReservationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    shortCode?: string
     AND?: ReservationWhereInput | ReservationWhereInput[]
     OR?: ReservationWhereInput[]
     NOT?: ReservationWhereInput | ReservationWhereInput[]
@@ -10667,12 +10703,13 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+  }, "id" | "shortCode">
 
   export type ReservationOrderByWithAggregationInput = {
     id?: SortOrder
     companyId?: SortOrder
     userId?: SortOrderInput | SortOrder
+    shortCode?: SortOrder
     name?: SortOrder
     phoneNumber?: SortOrder
     diningDate?: SortOrder
@@ -10692,6 +10729,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Reservation"> | string
     companyId?: StringWithAggregatesFilter<"Reservation"> | string
     userId?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
+    shortCode?: StringWithAggregatesFilter<"Reservation"> | string
     name?: StringWithAggregatesFilter<"Reservation"> | string
     phoneNumber?: StringWithAggregatesFilter<"Reservation"> | string
     diningDate?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
@@ -11046,6 +11084,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -11068,6 +11107,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -11086,6 +11126,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11108,6 +11149,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11128,6 +11170,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -11145,6 +11188,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11164,6 +11208,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11258,6 +11303,7 @@ export namespace Prisma {
 
   export type ReservationCreateInput = {
     id?: string
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -11273,6 +11319,7 @@ export namespace Prisma {
     id?: string
     companyId: string
     userId?: string | null
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -11284,6 +11331,7 @@ export namespace Prisma {
 
   export type ReservationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11299,6 +11347,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11312,6 +11361,7 @@ export namespace Prisma {
     id?: string
     companyId: string
     userId?: string | null
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -11323,6 +11373,7 @@ export namespace Prisma {
 
   export type ReservationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11336,6 +11387,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11776,6 +11828,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     diningType?: SortOrder
     seatNo?: SortOrder
+    preferredDiningDate?: SortOrder
     preferredDiningTime?: SortOrder
     preferredDeliveryTime?: SortOrder
     preferredPickupTime?: SortOrder
@@ -11799,6 +11852,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     diningType?: SortOrder
     seatNo?: SortOrder
+    preferredDiningDate?: SortOrder
     preferredDiningTime?: SortOrder
     preferredDeliveryTime?: SortOrder
     preferredPickupTime?: SortOrder
@@ -11818,6 +11872,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     diningType?: SortOrder
     seatNo?: SortOrder
+    preferredDiningDate?: SortOrder
     preferredDiningTime?: SortOrder
     preferredDeliveryTime?: SortOrder
     preferredPickupTime?: SortOrder
@@ -11894,6 +11949,7 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     userId?: SortOrder
+    shortCode?: SortOrder
     name?: SortOrder
     phoneNumber?: SortOrder
     diningDate?: SortOrder
@@ -11907,6 +11963,7 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     userId?: SortOrder
+    shortCode?: SortOrder
     name?: SortOrder
     phoneNumber?: SortOrder
     diningDate?: SortOrder
@@ -11920,6 +11977,7 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     userId?: SortOrder
+    shortCode?: SortOrder
     name?: SortOrder
     phoneNumber?: SortOrder
     diningDate?: SortOrder
@@ -12846,6 +12904,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -12866,6 +12925,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -12913,6 +12973,7 @@ export namespace Prisma {
 
   export type ReservationCreateWithoutUserInput = {
     id?: string
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -12926,6 +12987,7 @@ export namespace Prisma {
   export type ReservationUncheckedCreateWithoutUserInput = {
     id?: string
     companyId: string
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -13018,6 +13080,7 @@ export namespace Prisma {
     phoneNumber?: StringFilter<"Order"> | string
     diningType?: StringFilter<"Order"> | string
     seatNo?: StringNullableFilter<"Order"> | string | null
+    preferredDiningDate?: StringNullableFilter<"Order"> | string | null
     preferredDiningTime?: StringNullableFilter<"Order"> | string | null
     preferredDeliveryTime?: StringNullableFilter<"Order"> | string | null
     preferredPickupTime?: StringNullableFilter<"Order"> | string | null
@@ -13078,6 +13141,7 @@ export namespace Prisma {
     id?: StringFilter<"Reservation"> | string
     companyId?: StringFilter<"Reservation"> | string
     userId?: StringNullableFilter<"Reservation"> | string | null
+    shortCode?: StringFilter<"Reservation"> | string
     name?: StringFilter<"Reservation"> | string
     phoneNumber?: StringFilter<"Reservation"> | string
     diningDate?: DateTimeFilter<"Reservation"> | Date | string
@@ -13130,6 +13194,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -13150,6 +13215,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -13247,6 +13313,7 @@ export namespace Prisma {
 
   export type ReservationCreateWithoutCompanyInput = {
     id?: string
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -13260,6 +13327,7 @@ export namespace Prisma {
   export type ReservationUncheckedCreateWithoutCompanyInput = {
     id?: string
     userId?: string | null
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -13751,6 +13819,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -13772,6 +13841,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -13836,6 +13906,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13857,6 +13928,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14149,6 +14221,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -14169,6 +14242,7 @@ export namespace Prisma {
   export type ReservationCreateManyUserInput = {
     id?: string
     companyId: string
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -14256,6 +14330,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14276,6 +14351,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14295,6 +14371,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14328,6 +14405,7 @@ export namespace Prisma {
 
   export type ReservationUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14341,6 +14419,7 @@ export namespace Prisma {
   export type ReservationUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14353,6 +14432,7 @@ export namespace Prisma {
   export type ReservationUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14382,6 +14462,7 @@ export namespace Prisma {
     phoneNumber: string
     diningType: string
     seatNo?: string | null
+    preferredDiningDate?: string | null
     preferredDiningTime?: string | null
     preferredDeliveryTime?: string | null
     preferredPickupTime?: string | null
@@ -14395,6 +14476,7 @@ export namespace Prisma {
   export type ReservationCreateManyCompanyInput = {
     id?: string
     userId?: string | null
+    shortCode: string
     name: string
     phoneNumber: string
     diningDate: Date | string
@@ -14449,6 +14531,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14469,6 +14552,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14488,6 +14572,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningType?: StringFieldUpdateOperationsInput | string
     seatNo?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredDiningDate?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDiningTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDeliveryTime?: NullableStringFieldUpdateOperationsInput | string | null
     preferredPickupTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14544,6 +14629,7 @@ export namespace Prisma {
 
   export type ReservationUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14557,6 +14643,7 @@ export namespace Prisma {
   export type ReservationUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14569,6 +14656,7 @@ export namespace Prisma {
   export type ReservationUncheckedUpdateManyWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    shortCode?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string

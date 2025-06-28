@@ -31,3 +31,35 @@ export async function generateUniqueOrderShortCode(
 
   return code;
 }
+
+/**
+ * Generates a unique 4-digit short code for reservations.
+ * Retries until a unique code is found.
+ */
+export async function generateUniqueReservationShortCode(
+  prisma: PrismaClient
+): Promise<string> {
+  let isUnique = false;
+  let code = "";
+  const maxAttempts = 10;
+  let attempts = 0;
+
+  while (!isUnique && attempts < maxAttempts) {
+    code = Math.floor(1000 + Math.random() * 9000).toString(); // 1000-9999
+    const existing = await prisma.reservation.findUnique({
+      where: { shortCode: code },
+    });
+    if (!existing) {
+      isUnique = true;
+    }
+    attempts++;
+  }
+
+  if (!isUnique) {
+    throw new Error(
+      "Failed to generate a unique 4-digit short code after multiple attempts."
+    );
+  }
+
+  return code;
+}

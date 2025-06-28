@@ -12,6 +12,7 @@ export interface Order {
   email: string;
   diningType: string;
   seatNo?: string;
+  preferredDiningDate?: string;
   preferredDiningTime?: string;
   preferredDeliveryTime?: string;
   preferredPickupTime?: string;

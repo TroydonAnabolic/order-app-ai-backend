@@ -71,6 +71,7 @@ model Order {
   phoneNumber           String
   diningType            String
   seatNo                String?
+  preferredDiningDate   String?
   preferredDiningTime   String?
   preferredDeliveryTime String?
   preferredPickupTime   String?
@@ -102,6 +103,7 @@ model Reservation {
   id                  String   @id @default(cuid())
   companyId           String
   userId              String? // optional link to a user
+  shortCode           String   @unique // 4-digit unique code managed by your app
   name                String
   phoneNumber         String
   diningDate          DateTime

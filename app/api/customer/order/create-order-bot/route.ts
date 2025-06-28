@@ -3,7 +3,10 @@
 import { Order, OrderItem } from "@/types/order";
 import { PrismaClient } from "@/prisma/generated/client";
 import { Reservation } from "@/types/reservation";
-import { generateUniqueOrderShortCode } from "@/util/shortCode";
+import {
+  generateUniqueOrderShortCode,
+  generateUniqueReservationShortCode,
+} from "@/util/shortCode";
 
 export async function POST(req: Request) {
   // Use an existing Customer ID if this is a returning customer.
@@ -53,6 +56,7 @@ export async function POST(req: Request) {
       seatNo: order.seatNo ?? null,
       orderDate: new Date(),
       totalOrderCost: order.totalOrderCost,
+      preferredDiningDate: order.preferredDiningDate ?? null,
       preferredDiningTime: order.preferredDiningTime ?? null,
       preferredDeliveryTime: order.preferredDeliveryTime ?? null,
       preferredPickupTime: order.preferredPickupTime ?? null,
@@ -70,37 +74,45 @@ export async function POST(req: Request) {
       },
     };
 
-    const reservationData: any = {
-      name: reservation.name,
-      phoneNumber: reservation.phoneNumber,
-      diningDate: new Date(reservation.diningDate),
-      preferredTime: reservation.preferredTime,
-      seatNumbers: reservation.seatNumbers ?? "",
-      specialInstructions: reservation.specialInstructions ?? "",
-      createdAt: reservation.createdAt
-        ? new Date(reservation.createdAt)
-        : new Date(),
-    };
+    let reservationData: any = undefined;
+
+    if (order.diningType == "Dine In") {
+      const shortCodeReservation = await generateUniqueReservationShortCode(
+        prisma
+      );
+      console.log("Generated short code reservation:", shortCodeReservation);
+
+      reservationData = {
+        name: reservation.name,
+        shortCode: shortCodeReservation,
+        phoneNumber: reservation.phoneNumber,
+        diningDate: order.preferredDiningDate
+          ? new Date(order.preferredDiningDate)
+          : null, // <-- FIXED
+        preferredTime: order.preferredDiningTime,
+        seatNumbers: order.seatNo ?? "",
+        specialInstructions: reservation.specialInstructions ?? "",
+        createdAt: reservation.createdAt
+          ? new Date(reservation.createdAt)
+          : new Date(),
+      };
+    }
 
     // Only connect user if email is defined and not empty
     if (email && email.trim() !== "") {
       orderData.user = { connect: { email: email } };
-      reservationData.user = { connect: { email: email } };
+      if (order.diningType == "Dine In") {
+        reservationData.user = { connect: { email: email } };
+      }
     }
 
     // Only connect company if companyId is defined and not empty
     if (companyId && companyId.trim() !== "") {
       orderData.company = { connect: { id: companyId } };
-      reservationData.company = { connect: { id: companyId } };
+      if (order.diningType == "Dine In") {
+        reservationData.company = { connect: { id: companyId } };
+      }
     }
-
-    const createdOrder = await prisma.order.create({
-      data: orderData,
-    });
-
-    const createdReservation = await prisma.reservation.create({
-      data: reservationData,
-    });
 
     // send email to the customer if email is provided
     // if (email && email.trim() !== "") {
@@ -122,15 +134,32 @@ export async function POST(req: Request) {
     //   }
     // }
 
+    const createdOrder = await prisma.order.create({
+      data: orderData,
+    });
     console.log("Order created successfully:", createdOrder.id);
-    console.log("Reservation created successfully:", createdReservation.id);
-    return new Response(
-      JSON.stringify({
-        order: createdOrder,
-        reservation: createdReservation,
-      }),
-      { status: 201 }
-    );
+
+    if (order.diningType == "Dine In") {
+      const createdReservation = await prisma.reservation.create({
+        data: reservationData,
+      });
+      console.log("Reservation created successfully:", createdReservation.id);
+
+      return new Response(
+        JSON.stringify({
+          order: createdOrder,
+          reservation: createdReservation,
+        }),
+        { status: 201 }
+      );
+    } else {
+      return new Response(
+        JSON.stringify({
+          order: createdOrder,
+        }),
+        { status: 201 }
+      );
+    }
   } catch (error) {
     console.error("Error during order processing:", error);
     return new Response(JSON.stringify({ error: "Failed to process order" }), {
