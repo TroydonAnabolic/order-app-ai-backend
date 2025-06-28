@@ -1,4 +1,5 @@
 import { PrismaClient } from "@/prisma/generated/client";
+import { generateUniqueReservationShortCode } from "@/util/shortCode";
 
 export async function POST(request: Request) {
   console.log(
@@ -54,9 +55,13 @@ export async function POST(request: Request) {
       });
     }
 
+    const shortCode = await generateUniqueReservationShortCode(prisma);
+    console.log("Generated short code:", shortCode);
+
     console.log("Creating reservation...");
     const reservation = await prisma.reservation.create({
       data: {
+        shortCode: shortCode,
         user: { connect: { id: user.id } },
         company: { connect: { id: companyId } },
         name: `${user.givenName} ${user.familyName}`,
