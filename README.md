@@ -50,3 +50,6 @@ npx prisma migrate reset
 
 seed data
 npx prisma db seed
+
+push db changes
+npx prisma db push

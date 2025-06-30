@@ -10,20 +10,22 @@ generator client {
 }
 
 model User {
-  id               String        @id @default(cuid())
-  email            String        @unique
-  firebaseUid      String        @unique
-  givenName        String?
-  familyName       String?
-  phoneNumber      String?       @unique
-  address          String?
-  role             UserRole      @default(CUSTOMER)
-  companies        Company[]     @relation("CompanyAdmins")
-  createdCompanies Company[]     @relation("UserCreatedCompanies")
-  orders           Order[]
-  createdAt        DateTime      @default(now())
-  inviteCodesUsed  InviteCode[]  @relation("InviteCodeUsedBy")
-  reservations     Reservation[]
+  id                    String        @id @default(cuid())
+  email                 String        @unique
+  firebaseUid           String        @unique
+  givenName             String?
+  familyName            String?
+  phoneNumber           String?       @unique
+  address               String?
+  connectedAccountId    String        @unique
+  stripeConnectedLinked Boolean       @default(false)
+  role                  UserRole      @default(CUSTOMER)
+  companies             Company[]     @relation("CompanyAdmins")
+  createdCompanies      Company[]     @relation("UserCreatedCompanies")
+  orders                Order[]
+  createdAt             DateTime      @default(now())
+  inviteCodesUsed       InviteCode[]  @relation("InviteCodeUsedBy")
+  reservations          Reservation[]
 }
 
 model Company {

@@ -128,6 +128,8 @@ exports.Prisma.UserScalarFieldEnum = {
   familyName: 'familyName',
   phoneNumber: 'phoneNumber',
   address: 'address',
+  connectedAccountId: 'connectedAccountId',
+  stripeConnectedLinked: 'stripeConnectedLinked',
   role: 'role',
   createdAt: 'createdAt'
 };

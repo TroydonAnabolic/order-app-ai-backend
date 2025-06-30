@@ -16,6 +16,8 @@ model User {
   familyName        String?
   phoneNumber       String?    @unique
   address           String?
+  connectedAccountId String   @unique
+  stripeConnectedLinked Boolean @default(false)
   role              UserRole   @default(CUSTOMER)
   companies         Company[]  @relation("CompanyAdmins")
   createdCompanies  Company[]  @relation("UserCreatedCompanies")

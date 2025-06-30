@@ -1637,6 +1637,8 @@ export namespace Prisma {
     familyName: string | null
     phoneNumber: string | null
     address: string | null
+    connectedAccountId: string | null
+    stripeConnectedLinked: boolean | null
     role: $Enums.UserRole | null
     createdAt: Date | null
   }
@@ -1649,6 +1651,8 @@ export namespace Prisma {
     familyName: string | null
     phoneNumber: string | null
     address: string | null
+    connectedAccountId: string | null
+    stripeConnectedLinked: boolean | null
     role: $Enums.UserRole | null
     createdAt: Date | null
   }
@@ -1661,6 +1665,8 @@ export namespace Prisma {
     familyName: number
     phoneNumber: number
     address: number
+    connectedAccountId: number
+    stripeConnectedLinked: number
     role: number
     createdAt: number
     _all: number
@@ -1675,6 +1681,8 @@ export namespace Prisma {
     familyName?: true
     phoneNumber?: true
     address?: true
+    connectedAccountId?: true
+    stripeConnectedLinked?: true
     role?: true
     createdAt?: true
   }
@@ -1687,6 +1695,8 @@ export namespace Prisma {
     familyName?: true
     phoneNumber?: true
     address?: true
+    connectedAccountId?: true
+    stripeConnectedLinked?: true
     role?: true
     createdAt?: true
   }
@@ -1699,6 +1709,8 @@ export namespace Prisma {
     familyName?: true
     phoneNumber?: true
     address?: true
+    connectedAccountId?: true
+    stripeConnectedLinked?: true
     role?: true
     createdAt?: true
     _all?: true
@@ -1784,6 +1796,8 @@ export namespace Prisma {
     familyName: string | null
     phoneNumber: string | null
     address: string | null
+    connectedAccountId: string
+    stripeConnectedLinked: boolean
     role: $Enums.UserRole
     createdAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1813,6 +1827,8 @@ export namespace Prisma {
     familyName?: boolean
     phoneNumber?: boolean
     address?: boolean
+    connectedAccountId?: boolean
+    stripeConnectedLinked?: boolean
     role?: boolean
     createdAt?: boolean
     companies?: boolean | User$companiesArgs<ExtArgs>
@@ -1831,6 +1847,8 @@ export namespace Prisma {
     familyName?: boolean
     phoneNumber?: boolean
     address?: boolean
+    connectedAccountId?: boolean
+    stripeConnectedLinked?: boolean
     role?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1843,6 +1861,8 @@ export namespace Prisma {
     familyName?: boolean
     phoneNumber?: boolean
     address?: boolean
+    connectedAccountId?: boolean
+    stripeConnectedLinked?: boolean
     role?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1855,11 +1875,13 @@ export namespace Prisma {
     familyName?: boolean
     phoneNumber?: boolean
     address?: boolean
+    connectedAccountId?: boolean
+    stripeConnectedLinked?: boolean
     role?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firebaseUid" | "givenName" | "familyName" | "phoneNumber" | "address" | "role" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firebaseUid" | "givenName" | "familyName" | "phoneNumber" | "address" | "connectedAccountId" | "stripeConnectedLinked" | "role" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     companies?: boolean | User$companiesArgs<ExtArgs>
     createdCompanies?: boolean | User$createdCompaniesArgs<ExtArgs>
@@ -1888,6 +1910,8 @@ export namespace Prisma {
       familyName: string | null
       phoneNumber: string | null
       address: string | null
+      connectedAccountId: string
+      stripeConnectedLinked: boolean
       role: $Enums.UserRole
       createdAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2325,6 +2349,8 @@ export namespace Prisma {
     readonly familyName: FieldRef<"User", 'String'>
     readonly phoneNumber: FieldRef<"User", 'String'>
     readonly address: FieldRef<"User", 'String'>
+    readonly connectedAccountId: FieldRef<"User", 'String'>
+    readonly stripeConnectedLinked: FieldRef<"User", 'Boolean'>
     readonly role: FieldRef<"User", 'UserRole'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
@@ -9988,6 +10014,8 @@ export namespace Prisma {
     familyName: 'familyName',
     phoneNumber: 'phoneNumber',
     address: 'address',
+    connectedAccountId: 'connectedAccountId',
+    stripeConnectedLinked: 'stripeConnectedLinked',
     role: 'role',
     createdAt: 'createdAt'
   };
@@ -10134,6 +10162,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'UserRole'
    */
   export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
@@ -10187,13 +10222,6 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
   /**
    * Deep Input Types
    */
@@ -10210,6 +10238,8 @@ export namespace Prisma {
     familyName?: StringNullableFilter<"User"> | string | null
     phoneNumber?: StringNullableFilter<"User"> | string | null
     address?: StringNullableFilter<"User"> | string | null
+    connectedAccountId?: StringFilter<"User"> | string
+    stripeConnectedLinked?: BoolFilter<"User"> | boolean
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
     companies?: CompanyListRelationFilter
@@ -10227,6 +10257,8 @@ export namespace Prisma {
     familyName?: SortOrderInput | SortOrder
     phoneNumber?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     companies?: CompanyOrderByRelationAggregateInput
@@ -10241,12 +10273,14 @@ export namespace Prisma {
     email?: string
     firebaseUid?: string
     phoneNumber?: string
+    connectedAccountId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     givenName?: StringNullableFilter<"User"> | string | null
     familyName?: StringNullableFilter<"User"> | string | null
     address?: StringNullableFilter<"User"> | string | null
+    stripeConnectedLinked?: BoolFilter<"User"> | boolean
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
     companies?: CompanyListRelationFilter
@@ -10254,7 +10288,7 @@ export namespace Prisma {
     orders?: OrderListRelationFilter
     inviteCodesUsed?: InviteCodeListRelationFilter
     reservations?: ReservationListRelationFilter
-  }, "id" | "email" | "firebaseUid" | "phoneNumber">
+  }, "id" | "email" | "firebaseUid" | "phoneNumber" | "connectedAccountId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10264,6 +10298,8 @@ export namespace Prisma {
     familyName?: SortOrderInput | SortOrder
     phoneNumber?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -10282,6 +10318,8 @@ export namespace Prisma {
     familyName?: StringNullableWithAggregatesFilter<"User"> | string | null
     phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     address?: StringNullableWithAggregatesFilter<"User"> | string | null
+    connectedAccountId?: StringWithAggregatesFilter<"User"> | string
+    stripeConnectedLinked?: BoolWithAggregatesFilter<"User"> | boolean
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -10802,6 +10840,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyCreateNestedManyWithoutAdminsInput
@@ -10819,6 +10859,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
@@ -10836,6 +10878,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUpdateManyWithoutAdminsNestedInput
@@ -10853,6 +10897,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
@@ -10870,6 +10916,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
   }
@@ -10882,6 +10930,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10894,6 +10944,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11482,6 +11534,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type EnumUserRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
@@ -11553,6 +11610,8 @@ export namespace Prisma {
     familyName?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -11565,6 +11624,8 @@ export namespace Prisma {
     familyName?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -11577,6 +11638,8 @@ export namespace Prisma {
     familyName?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -11615,6 +11678,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -11987,11 +12058,6 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type InviteCodeCountOrderByAggregateInput = {
     id?: SortOrder
     code?: SortOrder
@@ -12014,14 +12080,6 @@ export namespace Prisma {
     isUsed?: SortOrder
     createdAt?: SortOrder
     usedById?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CompanyCreateNestedManyWithoutAdminsInput = {
@@ -12098,6 +12156,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -12634,10 +12696,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type UserUpdateOneWithoutInviteCodesUsedNestedInput = {
     create?: XOR<UserCreateWithoutInviteCodesUsedInput, UserUncheckedCreateWithoutInviteCodesUsedInput>
     connectOrCreate?: UserCreateOrConnectWithoutInviteCodesUsedInput
@@ -12674,6 +12732,11 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
@@ -12750,6 +12813,14 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
@@ -12815,19 +12886,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CompanyCreateWithoutAdminsInput = {
@@ -13245,6 +13303,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     createdCompanies?: CompanyCreateNestedManyWithoutCreatedByInput
@@ -13261,6 +13321,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     createdCompanies?: CompanyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13282,6 +13344,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyCreateNestedManyWithoutAdminsInput
@@ -13298,6 +13362,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
@@ -13422,6 +13488,8 @@ export namespace Prisma {
     familyName?: StringNullableFilter<"User"> | string | null
     phoneNumber?: StringNullableFilter<"User"> | string | null
     address?: StringNullableFilter<"User"> | string | null
+    connectedAccountId?: StringFilter<"User"> | string
+    stripeConnectedLinked?: BoolFilter<"User"> | boolean
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
   }
@@ -13445,6 +13513,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUpdateManyWithoutAdminsNestedInput
@@ -13461,6 +13531,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
@@ -13624,6 +13696,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyCreateNestedManyWithoutAdminsInput
@@ -13640,6 +13714,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
@@ -13735,6 +13811,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUpdateManyWithoutAdminsNestedInput
@@ -13751,6 +13829,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
@@ -14015,6 +14095,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyCreateNestedManyWithoutAdminsInput
@@ -14031,6 +14113,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
@@ -14100,6 +14184,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUpdateManyWithoutAdminsNestedInput
@@ -14116,6 +14202,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
@@ -14132,6 +14220,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyCreateNestedManyWithoutAdminsInput
@@ -14148,6 +14238,8 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
     companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
@@ -14180,6 +14272,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUpdateManyWithoutAdminsNestedInput
@@ -14196,6 +14290,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
@@ -14591,6 +14687,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdCompanies?: CompanyUpdateManyWithoutCreatedByNestedInput
@@ -14607,6 +14705,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdCompanies?: CompanyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14623,6 +14723,8 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
