@@ -10,12 +10,10 @@ export async function GET() {
   });
 
   try {
-    // Only get companies that have no admins linked
+    // Get companies with no user linked
     const companies = await prisma.company.findMany({
       where: {
-        admins: {
-          none: {}, // this means "no users in the admins relation"
-        },
+        userId: null, // Companies not linked to any user
       },
       orderBy: { createdAt: "desc" },
       select: { id: true, name: true, address: true },

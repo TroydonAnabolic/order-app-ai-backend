@@ -1433,16 +1433,12 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    companies: number
-    createdCompanies: number
     orders: number
     inviteCodesUsed: number
     reservations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    companies?: boolean | UserCountOutputTypeCountCompaniesArgs
-    createdCompanies?: boolean | UserCountOutputTypeCountCreatedCompaniesArgs
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
     inviteCodesUsed?: boolean | UserCountOutputTypeCountInviteCodesUsedArgs
     reservations?: boolean | UserCountOutputTypeCountReservationsArgs
@@ -1457,20 +1453,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CompanyWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountCreatedCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CompanyWhereInput
   }
 
   /**
@@ -1502,14 +1484,12 @@ export namespace Prisma {
   export type CompanyCountOutputType = {
     items: number
     orders: number
-    admins: number
     reservations: number
   }
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | CompanyCountOutputTypeCountItemsArgs
     orders?: boolean | CompanyCountOutputTypeCountOrdersArgs
-    admins?: boolean | CompanyCountOutputTypeCountAdminsArgs
     reservations?: boolean | CompanyCountOutputTypeCountReservationsArgs
   }
 
@@ -1536,13 +1516,6 @@ export namespace Prisma {
    */
   export type CompanyCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderWhereInput
-  }
-
-  /**
-   * CompanyCountOutputType without action
-   */
-  export type CompanyCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
   }
 
   /**
@@ -1796,7 +1769,7 @@ export namespace Prisma {
     familyName: string | null
     phoneNumber: string | null
     address: string | null
-    connectedAccountId: string
+    connectedAccountId: string | null
     stripeConnectedLinked: boolean
     role: $Enums.UserRole
     createdAt: Date
@@ -1831,8 +1804,7 @@ export namespace Prisma {
     stripeConnectedLinked?: boolean
     role?: boolean
     createdAt?: boolean
-    companies?: boolean | User$companiesArgs<ExtArgs>
-    createdCompanies?: boolean | User$createdCompaniesArgs<ExtArgs>
+    company?: boolean | User$companyArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     inviteCodesUsed?: boolean | User$inviteCodesUsedArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
@@ -1883,8 +1855,7 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firebaseUid" | "givenName" | "familyName" | "phoneNumber" | "address" | "connectedAccountId" | "stripeConnectedLinked" | "role" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    companies?: boolean | User$companiesArgs<ExtArgs>
-    createdCompanies?: boolean | User$createdCompaniesArgs<ExtArgs>
+    company?: boolean | User$companyArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     inviteCodesUsed?: boolean | User$inviteCodesUsedArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
@@ -1896,8 +1867,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      companies: Prisma.$CompanyPayload<ExtArgs>[]
-      createdCompanies: Prisma.$CompanyPayload<ExtArgs>[]
+      company: Prisma.$CompanyPayload<ExtArgs> | null
       orders: Prisma.$OrderPayload<ExtArgs>[]
       inviteCodesUsed: Prisma.$InviteCodePayload<ExtArgs>[]
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
@@ -1910,7 +1880,7 @@ export namespace Prisma {
       familyName: string | null
       phoneNumber: string | null
       address: string | null
-      connectedAccountId: string
+      connectedAccountId: string | null
       stripeConnectedLinked: boolean
       role: $Enums.UserRole
       createdAt: Date
@@ -2308,8 +2278,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    companies<T extends User$companiesArgs<ExtArgs> = {}>(args?: Subset<T, User$companiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    createdCompanies<T extends User$createdCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    company<T extends User$companyArgs<ExtArgs> = {}>(args?: Subset<T, User$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     inviteCodesUsed<T extends User$inviteCodesUsedArgs<ExtArgs> = {}>(args?: Subset<T, User$inviteCodesUsedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InviteCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reservations<T extends User$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, User$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2741,9 +2710,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.companies
+   * User.company
    */
-  export type User$companiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$companyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Company
      */
@@ -2757,35 +2726,6 @@ export namespace Prisma {
      */
     include?: CompanyInclude<ExtArgs> | null
     where?: CompanyWhereInput
-    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
-    cursor?: CompanyWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
-  }
-
-  /**
-   * User.createdCompanies
-   */
-  export type User$createdCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Company
-     */
-    select?: CompanySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Company
-     */
-    omit?: CompanyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CompanyInclude<ExtArgs> | null
-    where?: CompanyWhereInput
-    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
-    cursor?: CompanyWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
   }
 
   /**
@@ -2895,7 +2835,7 @@ export namespace Prisma {
     address: string | null
     shortCode: string | null
     currency: string | null
-    createdById: string | null
+    userId: string | null
     createdAt: Date | null
   }
 
@@ -2905,7 +2845,7 @@ export namespace Prisma {
     address: string | null
     shortCode: string | null
     currency: string | null
-    createdById: string | null
+    userId: string | null
     createdAt: Date | null
   }
 
@@ -2915,7 +2855,7 @@ export namespace Prisma {
     address: number
     shortCode: number
     currency: number
-    createdById: number
+    userId: number
     createdAt: number
     _all: number
   }
@@ -2927,7 +2867,7 @@ export namespace Prisma {
     address?: true
     shortCode?: true
     currency?: true
-    createdById?: true
+    userId?: true
     createdAt?: true
   }
 
@@ -2937,7 +2877,7 @@ export namespace Prisma {
     address?: true
     shortCode?: true
     currency?: true
-    createdById?: true
+    userId?: true
     createdAt?: true
   }
 
@@ -2947,7 +2887,7 @@ export namespace Prisma {
     address?: true
     shortCode?: true
     currency?: true
-    createdById?: true
+    userId?: true
     createdAt?: true
     _all?: true
   }
@@ -3030,7 +2970,7 @@ export namespace Prisma {
     address: string | null
     shortCode: string
     currency: string
-    createdById: string
+    userId: string | null
     createdAt: Date
     _count: CompanyCountAggregateOutputType | null
     _min: CompanyMinAggregateOutputType | null
@@ -3057,12 +2997,11 @@ export namespace Prisma {
     address?: boolean
     shortCode?: boolean
     currency?: boolean
-    createdById?: boolean
+    userId?: boolean
     createdAt?: boolean
     items?: boolean | Company$itemsArgs<ExtArgs>
     orders?: boolean | Company$ordersArgs<ExtArgs>
-    admins?: boolean | Company$adminsArgs<ExtArgs>
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Company$userArgs<ExtArgs>
     reservations?: boolean | Company$reservationsArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
@@ -3073,9 +3012,9 @@ export namespace Prisma {
     address?: boolean
     shortCode?: boolean
     currency?: boolean
-    createdById?: boolean
+    userId?: boolean
     createdAt?: boolean
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Company$userArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
   export type CompanySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3084,9 +3023,9 @@ export namespace Prisma {
     address?: boolean
     shortCode?: boolean
     currency?: boolean
-    createdById?: boolean
+    userId?: boolean
     createdAt?: boolean
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Company$userArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
   export type CompanySelectScalar = {
@@ -3095,24 +3034,23 @@ export namespace Prisma {
     address?: boolean
     shortCode?: boolean
     currency?: boolean
-    createdById?: boolean
+    userId?: boolean
     createdAt?: boolean
   }
 
-  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "shortCode" | "currency" | "createdById" | "createdAt", ExtArgs["result"]["company"]>
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "shortCode" | "currency" | "userId" | "createdAt", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | Company$itemsArgs<ExtArgs>
     orders?: boolean | Company$ordersArgs<ExtArgs>
-    admins?: boolean | Company$adminsArgs<ExtArgs>
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Company$userArgs<ExtArgs>
     reservations?: boolean | Company$reservationsArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Company$userArgs<ExtArgs>
   }
   export type CompanyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Company$userArgs<ExtArgs>
   }
 
   export type $CompanyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3120,8 +3058,7 @@ export namespace Prisma {
     objects: {
       items: Prisma.$MenuItemPayload<ExtArgs>[]
       orders: Prisma.$OrderPayload<ExtArgs>[]
-      admins: Prisma.$UserPayload<ExtArgs>[]
-      createdBy: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs> | null
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3130,7 +3067,7 @@ export namespace Prisma {
       address: string | null
       shortCode: string
       currency: string
-      createdById: string
+      userId: string | null
       createdAt: Date
     }, ExtArgs["result"]["company"]>
     composites: {}
@@ -3528,8 +3465,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     items<T extends Company$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Company$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends Company$ordersArgs<ExtArgs> = {}>(args?: Subset<T, Company$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    admins<T extends Company$adminsArgs<ExtArgs> = {}>(args?: Subset<T, Company$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends Company$userArgs<ExtArgs> = {}>(args?: Subset<T, Company$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     reservations<T extends Company$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Company$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3565,7 +3501,7 @@ export namespace Prisma {
     readonly address: FieldRef<"Company", 'String'>
     readonly shortCode: FieldRef<"Company", 'String'>
     readonly currency: FieldRef<"Company", 'String'>
-    readonly createdById: FieldRef<"Company", 'String'>
+    readonly userId: FieldRef<"Company", 'String'>
     readonly createdAt: FieldRef<"Company", 'DateTime'>
   }
     
@@ -4011,9 +3947,9 @@ export namespace Prisma {
   }
 
   /**
-   * Company.admins
+   * Company.user
    */
-  export type Company$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Company$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4027,11 +3963,6 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
@@ -10029,7 +9960,7 @@ export namespace Prisma {
     address: 'address',
     shortCode: 'shortCode',
     currency: 'currency',
-    createdById: 'createdById',
+    userId: 'userId',
     createdAt: 'createdAt'
   };
 
@@ -10238,12 +10169,11 @@ export namespace Prisma {
     familyName?: StringNullableFilter<"User"> | string | null
     phoneNumber?: StringNullableFilter<"User"> | string | null
     address?: StringNullableFilter<"User"> | string | null
-    connectedAccountId?: StringFilter<"User"> | string
+    connectedAccountId?: StringNullableFilter<"User"> | string | null
     stripeConnectedLinked?: BoolFilter<"User"> | boolean
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
-    companies?: CompanyListRelationFilter
-    createdCompanies?: CompanyListRelationFilter
+    company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
     orders?: OrderListRelationFilter
     inviteCodesUsed?: InviteCodeListRelationFilter
     reservations?: ReservationListRelationFilter
@@ -10257,12 +10187,11 @@ export namespace Prisma {
     familyName?: SortOrderInput | SortOrder
     phoneNumber?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
-    connectedAccountId?: SortOrder
+    connectedAccountId?: SortOrderInput | SortOrder
     stripeConnectedLinked?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
-    companies?: CompanyOrderByRelationAggregateInput
-    createdCompanies?: CompanyOrderByRelationAggregateInput
+    company?: CompanyOrderByWithRelationInput
     orders?: OrderOrderByRelationAggregateInput
     inviteCodesUsed?: InviteCodeOrderByRelationAggregateInput
     reservations?: ReservationOrderByRelationAggregateInput
@@ -10283,8 +10212,7 @@ export namespace Prisma {
     stripeConnectedLinked?: BoolFilter<"User"> | boolean
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
-    companies?: CompanyListRelationFilter
-    createdCompanies?: CompanyListRelationFilter
+    company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
     orders?: OrderListRelationFilter
     inviteCodesUsed?: InviteCodeListRelationFilter
     reservations?: ReservationListRelationFilter
@@ -10298,7 +10226,7 @@ export namespace Prisma {
     familyName?: SortOrderInput | SortOrder
     phoneNumber?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
-    connectedAccountId?: SortOrder
+    connectedAccountId?: SortOrderInput | SortOrder
     stripeConnectedLinked?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
@@ -10318,7 +10246,7 @@ export namespace Prisma {
     familyName?: StringNullableWithAggregatesFilter<"User"> | string | null
     phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     address?: StringNullableWithAggregatesFilter<"User"> | string | null
-    connectedAccountId?: StringWithAggregatesFilter<"User"> | string
+    connectedAccountId?: StringNullableWithAggregatesFilter<"User"> | string | null
     stripeConnectedLinked?: BoolWithAggregatesFilter<"User"> | boolean
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -10333,12 +10261,11 @@ export namespace Prisma {
     address?: StringNullableFilter<"Company"> | string | null
     shortCode?: StringFilter<"Company"> | string
     currency?: StringFilter<"Company"> | string
-    createdById?: StringFilter<"Company"> | string
+    userId?: StringNullableFilter<"Company"> | string | null
     createdAt?: DateTimeFilter<"Company"> | Date | string
     items?: MenuItemListRelationFilter
     orders?: OrderListRelationFilter
-    admins?: UserListRelationFilter
-    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     reservations?: ReservationListRelationFilter
   }
 
@@ -10348,32 +10275,30 @@ export namespace Prisma {
     address?: SortOrderInput | SortOrder
     shortCode?: SortOrder
     currency?: SortOrder
-    createdById?: SortOrder
+    userId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     items?: MenuItemOrderByRelationAggregateInput
     orders?: OrderOrderByRelationAggregateInput
-    admins?: UserOrderByRelationAggregateInput
-    createdBy?: UserOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     reservations?: ReservationOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     shortCode?: string
+    userId?: string
     AND?: CompanyWhereInput | CompanyWhereInput[]
     OR?: CompanyWhereInput[]
     NOT?: CompanyWhereInput | CompanyWhereInput[]
     name?: StringFilter<"Company"> | string
     address?: StringNullableFilter<"Company"> | string | null
     currency?: StringFilter<"Company"> | string
-    createdById?: StringFilter<"Company"> | string
     createdAt?: DateTimeFilter<"Company"> | Date | string
     items?: MenuItemListRelationFilter
     orders?: OrderListRelationFilter
-    admins?: UserListRelationFilter
-    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     reservations?: ReservationListRelationFilter
-  }, "id" | "shortCode">
+  }, "id" | "shortCode" | "userId">
 
   export type CompanyOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10381,7 +10306,7 @@ export namespace Prisma {
     address?: SortOrderInput | SortOrder
     shortCode?: SortOrder
     currency?: SortOrder
-    createdById?: SortOrder
+    userId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: CompanyCountOrderByAggregateInput
     _max?: CompanyMaxOrderByAggregateInput
@@ -10397,7 +10322,7 @@ export namespace Prisma {
     address?: StringNullableWithAggregatesFilter<"Company"> | string | null
     shortCode?: StringWithAggregatesFilter<"Company"> | string
     currency?: StringWithAggregatesFilter<"Company"> | string
-    createdById?: StringWithAggregatesFilter<"Company"> | string
+    userId?: StringNullableWithAggregatesFilter<"Company"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Company"> | Date | string
   }
 
@@ -10840,12 +10765,11 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    companies?: CompanyCreateNestedManyWithoutAdminsInput
-    createdCompanies?: CompanyCreateNestedManyWithoutCreatedByInput
+    company?: CompanyCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     inviteCodesUsed?: InviteCodeCreateNestedManyWithoutUsedByInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
@@ -10859,12 +10783,11 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
-    createdCompanies?: CompanyUncheckedCreateNestedManyWithoutCreatedByInput
+    company?: CompanyUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     inviteCodesUsed?: InviteCodeUncheckedCreateNestedManyWithoutUsedByInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
@@ -10878,12 +10801,11 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUpdateManyWithoutAdminsNestedInput
-    createdCompanies?: CompanyUpdateManyWithoutCreatedByNestedInput
+    company?: CompanyUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     inviteCodesUsed?: InviteCodeUpdateManyWithoutUsedByNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
@@ -10897,12 +10819,11 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
-    createdCompanies?: CompanyUncheckedUpdateManyWithoutCreatedByNestedInput
+    company?: CompanyUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     inviteCodesUsed?: InviteCodeUncheckedUpdateManyWithoutUsedByNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
@@ -10916,7 +10837,7 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
@@ -10930,7 +10851,7 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10944,7 +10865,7 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10959,8 +10880,7 @@ export namespace Prisma {
     createdAt?: Date | string
     items?: MenuItemCreateNestedManyWithoutCompanyInput
     orders?: OrderCreateNestedManyWithoutCompanyInput
-    admins?: UserCreateNestedManyWithoutCompaniesInput
-    createdBy: UserCreateNestedOneWithoutCreatedCompaniesInput
+    user?: UserCreateNestedOneWithoutCompanyInput
     reservations?: ReservationCreateNestedManyWithoutCompanyInput
   }
 
@@ -10970,11 +10890,10 @@ export namespace Prisma {
     address?: string | null
     shortCode: string
     currency: string
-    createdById: string
+    userId?: string | null
     createdAt?: Date | string
     items?: MenuItemUncheckedCreateNestedManyWithoutCompanyInput
     orders?: OrderUncheckedCreateNestedManyWithoutCompanyInput
-    admins?: UserUncheckedCreateNestedManyWithoutCompaniesInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutCompanyInput
   }
 
@@ -10987,8 +10906,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: MenuItemUpdateManyWithoutCompanyNestedInput
     orders?: OrderUpdateManyWithoutCompanyNestedInput
-    admins?: UserUpdateManyWithoutCompaniesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedCompaniesNestedInput
+    user?: UserUpdateOneWithoutCompanyNestedInput
     reservations?: ReservationUpdateManyWithoutCompanyNestedInput
   }
 
@@ -10998,11 +10916,10 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     shortCode?: StringFieldUpdateOperationsInput | string
     currency?: StringFieldUpdateOperationsInput | string
-    createdById?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: MenuItemUncheckedUpdateManyWithoutCompanyNestedInput
     orders?: OrderUncheckedUpdateManyWithoutCompanyNestedInput
-    admins?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
@@ -11012,7 +10929,7 @@ export namespace Prisma {
     address?: string | null
     shortCode: string
     currency: string
-    createdById: string
+    userId?: string | null
     createdAt?: Date | string
   }
 
@@ -11031,7 +10948,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     shortCode?: StringFieldUpdateOperationsInput | string
     currency?: StringFieldUpdateOperationsInput | string
-    createdById?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -11557,10 +11474,9 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type CompanyListRelationFilter = {
-    every?: CompanyWhereInput
-    some?: CompanyWhereInput
-    none?: CompanyWhereInput
+  export type CompanyNullableScalarRelationFilter = {
+    is?: CompanyWhereInput | null
+    isNot?: CompanyWhereInput | null
   }
 
   export type OrderListRelationFilter = {
@@ -11584,10 +11500,6 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type CompanyOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type OrderOrderByRelationAggregateInput = {
@@ -11718,22 +11630,12 @@ export namespace Prisma {
     none?: MenuItemWhereInput
   }
 
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type MenuItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11743,7 +11645,7 @@ export namespace Prisma {
     address?: SortOrder
     shortCode?: SortOrder
     currency?: SortOrder
-    createdById?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11753,7 +11655,7 @@ export namespace Prisma {
     address?: SortOrder
     shortCode?: SortOrder
     currency?: SortOrder
-    createdById?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11763,7 +11665,7 @@ export namespace Prisma {
     address?: SortOrder
     shortCode?: SortOrder
     currency?: SortOrder
-    createdById?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11883,11 +11785,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
   }
 
   export type OrderCountOrderByAggregateInput = {
@@ -12082,17 +11979,10 @@ export namespace Prisma {
     usedById?: SortOrder
   }
 
-  export type CompanyCreateNestedManyWithoutAdminsInput = {
-    create?: XOR<CompanyCreateWithoutAdminsInput, CompanyUncheckedCreateWithoutAdminsInput> | CompanyCreateWithoutAdminsInput[] | CompanyUncheckedCreateWithoutAdminsInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutAdminsInput | CompanyCreateOrConnectWithoutAdminsInput[]
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-  }
-
-  export type CompanyCreateNestedManyWithoutCreatedByInput = {
-    create?: XOR<CompanyCreateWithoutCreatedByInput, CompanyUncheckedCreateWithoutCreatedByInput> | CompanyCreateWithoutCreatedByInput[] | CompanyUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutCreatedByInput | CompanyCreateOrConnectWithoutCreatedByInput[]
-    createMany?: CompanyCreateManyCreatedByInputEnvelope
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+  export type CompanyCreateNestedOneWithoutUserInput = {
+    create?: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUserInput
+    connect?: CompanyWhereUniqueInput
   }
 
   export type OrderCreateNestedManyWithoutUserInput = {
@@ -12116,17 +12006,10 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
-  export type CompanyUncheckedCreateNestedManyWithoutAdminsInput = {
-    create?: XOR<CompanyCreateWithoutAdminsInput, CompanyUncheckedCreateWithoutAdminsInput> | CompanyCreateWithoutAdminsInput[] | CompanyUncheckedCreateWithoutAdminsInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutAdminsInput | CompanyCreateOrConnectWithoutAdminsInput[]
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-  }
-
-  export type CompanyUncheckedCreateNestedManyWithoutCreatedByInput = {
-    create?: XOR<CompanyCreateWithoutCreatedByInput, CompanyUncheckedCreateWithoutCreatedByInput> | CompanyCreateWithoutCreatedByInput[] | CompanyUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutCreatedByInput | CompanyCreateOrConnectWithoutCreatedByInput[]
-    createMany?: CompanyCreateManyCreatedByInputEnvelope
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+  export type CompanyUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUserInput
+    connect?: CompanyWhereUniqueInput
   }
 
   export type OrderUncheckedCreateNestedManyWithoutUserInput = {
@@ -12170,31 +12053,14 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type CompanyUpdateManyWithoutAdminsNestedInput = {
-    create?: XOR<CompanyCreateWithoutAdminsInput, CompanyUncheckedCreateWithoutAdminsInput> | CompanyCreateWithoutAdminsInput[] | CompanyUncheckedCreateWithoutAdminsInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutAdminsInput | CompanyCreateOrConnectWithoutAdminsInput[]
-    upsert?: CompanyUpsertWithWhereUniqueWithoutAdminsInput | CompanyUpsertWithWhereUniqueWithoutAdminsInput[]
-    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    update?: CompanyUpdateWithWhereUniqueWithoutAdminsInput | CompanyUpdateWithWhereUniqueWithoutAdminsInput[]
-    updateMany?: CompanyUpdateManyWithWhereWithoutAdminsInput | CompanyUpdateManyWithWhereWithoutAdminsInput[]
-    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
-  }
-
-  export type CompanyUpdateManyWithoutCreatedByNestedInput = {
-    create?: XOR<CompanyCreateWithoutCreatedByInput, CompanyUncheckedCreateWithoutCreatedByInput> | CompanyCreateWithoutCreatedByInput[] | CompanyUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutCreatedByInput | CompanyCreateOrConnectWithoutCreatedByInput[]
-    upsert?: CompanyUpsertWithWhereUniqueWithoutCreatedByInput | CompanyUpsertWithWhereUniqueWithoutCreatedByInput[]
-    createMany?: CompanyCreateManyCreatedByInputEnvelope
-    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    update?: CompanyUpdateWithWhereUniqueWithoutCreatedByInput | CompanyUpdateWithWhereUniqueWithoutCreatedByInput[]
-    updateMany?: CompanyUpdateManyWithWhereWithoutCreatedByInput | CompanyUpdateManyWithWhereWithoutCreatedByInput[]
-    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+  export type CompanyUpdateOneWithoutUserNestedInput = {
+    create?: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUserInput
+    upsert?: CompanyUpsertWithoutUserInput
+    disconnect?: CompanyWhereInput | boolean
+    delete?: CompanyWhereInput | boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutUserInput, CompanyUpdateWithoutUserInput>, CompanyUncheckedUpdateWithoutUserInput>
   }
 
   export type OrderUpdateManyWithoutUserNestedInput = {
@@ -12239,31 +12105,14 @@ export namespace Prisma {
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
   }
 
-  export type CompanyUncheckedUpdateManyWithoutAdminsNestedInput = {
-    create?: XOR<CompanyCreateWithoutAdminsInput, CompanyUncheckedCreateWithoutAdminsInput> | CompanyCreateWithoutAdminsInput[] | CompanyUncheckedCreateWithoutAdminsInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutAdminsInput | CompanyCreateOrConnectWithoutAdminsInput[]
-    upsert?: CompanyUpsertWithWhereUniqueWithoutAdminsInput | CompanyUpsertWithWhereUniqueWithoutAdminsInput[]
-    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    update?: CompanyUpdateWithWhereUniqueWithoutAdminsInput | CompanyUpdateWithWhereUniqueWithoutAdminsInput[]
-    updateMany?: CompanyUpdateManyWithWhereWithoutAdminsInput | CompanyUpdateManyWithWhereWithoutAdminsInput[]
-    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
-  }
-
-  export type CompanyUncheckedUpdateManyWithoutCreatedByNestedInput = {
-    create?: XOR<CompanyCreateWithoutCreatedByInput, CompanyUncheckedCreateWithoutCreatedByInput> | CompanyCreateWithoutCreatedByInput[] | CompanyUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutCreatedByInput | CompanyCreateOrConnectWithoutCreatedByInput[]
-    upsert?: CompanyUpsertWithWhereUniqueWithoutCreatedByInput | CompanyUpsertWithWhereUniqueWithoutCreatedByInput[]
-    createMany?: CompanyCreateManyCreatedByInputEnvelope
-    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    update?: CompanyUpdateWithWhereUniqueWithoutCreatedByInput | CompanyUpdateWithWhereUniqueWithoutCreatedByInput[]
-    updateMany?: CompanyUpdateManyWithWhereWithoutCreatedByInput | CompanyUpdateManyWithWhereWithoutCreatedByInput[]
-    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+  export type CompanyUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUserInput
+    upsert?: CompanyUpsertWithoutUserInput
+    disconnect?: CompanyWhereInput | boolean
+    delete?: CompanyWhereInput | boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutUserInput, CompanyUpdateWithoutUserInput>, CompanyUncheckedUpdateWithoutUserInput>
   }
 
   export type OrderUncheckedUpdateManyWithoutUserNestedInput = {
@@ -12322,15 +12171,9 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
-  export type UserCreateNestedManyWithoutCompaniesInput = {
-    create?: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput> | UserCreateWithoutCompaniesInput[] | UserUncheckedCreateWithoutCompaniesInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutCompaniesInput | UserCreateOrConnectWithoutCompaniesInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
-  export type UserCreateNestedOneWithoutCreatedCompaniesInput = {
-    create?: XOR<UserCreateWithoutCreatedCompaniesInput, UserUncheckedCreateWithoutCreatedCompaniesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCreatedCompaniesInput
+  export type UserCreateNestedOneWithoutCompanyInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput
     connect?: UserWhereUniqueInput
   }
 
@@ -12353,12 +12196,6 @@ export namespace Prisma {
     connectOrCreate?: OrderCreateOrConnectWithoutCompanyInput | OrderCreateOrConnectWithoutCompanyInput[]
     createMany?: OrderCreateManyCompanyInputEnvelope
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-  }
-
-  export type UserUncheckedCreateNestedManyWithoutCompaniesInput = {
-    create?: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput> | UserCreateWithoutCompaniesInput[] | UserUncheckedCreateWithoutCompaniesInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutCompaniesInput | UserCreateOrConnectWithoutCompaniesInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
   export type ReservationUncheckedCreateNestedManyWithoutCompanyInput = {
@@ -12396,25 +12233,14 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
-  export type UserUpdateManyWithoutCompaniesNestedInput = {
-    create?: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput> | UserCreateWithoutCompaniesInput[] | UserUncheckedCreateWithoutCompaniesInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutCompaniesInput | UserCreateOrConnectWithoutCompaniesInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutCompaniesInput | UserUpsertWithWhereUniqueWithoutCompaniesInput[]
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutCompaniesInput | UserUpdateWithWhereUniqueWithoutCompaniesInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutCompaniesInput | UserUpdateManyWithWhereWithoutCompaniesInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutCreatedCompaniesNestedInput = {
-    create?: XOR<UserCreateWithoutCreatedCompaniesInput, UserUncheckedCreateWithoutCreatedCompaniesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCreatedCompaniesInput
-    upsert?: UserUpsertWithoutCreatedCompaniesInput
+  export type UserUpdateOneWithoutCompanyNestedInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput
+    upsert?: UserUpsertWithoutCompanyInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedCompaniesInput, UserUpdateWithoutCreatedCompaniesInput>, UserUncheckedUpdateWithoutCreatedCompaniesInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCompanyInput, UserUpdateWithoutCompanyInput>, UserUncheckedUpdateWithoutCompanyInput>
   }
 
   export type ReservationUpdateManyWithoutCompanyNestedInput = {
@@ -12457,19 +12283,6 @@ export namespace Prisma {
     update?: OrderUpdateWithWhereUniqueWithoutCompanyInput | OrderUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: OrderUpdateManyWithWhereWithoutCompanyInput | OrderUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
-  }
-
-  export type UserUncheckedUpdateManyWithoutCompaniesNestedInput = {
-    create?: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput> | UserCreateWithoutCompaniesInput[] | UserUncheckedCreateWithoutCompaniesInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutCompaniesInput | UserCreateOrConnectWithoutCompaniesInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutCompaniesInput | UserUpsertWithWhereUniqueWithoutCompaniesInput[]
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutCompaniesInput | UserUpdateWithWhereUniqueWithoutCompaniesInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutCompaniesInput | UserUpdateManyWithWhereWithoutCompaniesInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type ReservationUncheckedUpdateManyWithoutCompanyNestedInput = {
@@ -12888,7 +12701,7 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type CompanyCreateWithoutAdminsInput = {
+  export type CompanyCreateWithoutUserInput = {
     id?: string
     name: string
     address?: string | null
@@ -12897,42 +12710,10 @@ export namespace Prisma {
     createdAt?: Date | string
     items?: MenuItemCreateNestedManyWithoutCompanyInput
     orders?: OrderCreateNestedManyWithoutCompanyInput
-    createdBy: UserCreateNestedOneWithoutCreatedCompaniesInput
     reservations?: ReservationCreateNestedManyWithoutCompanyInput
   }
 
-  export type CompanyUncheckedCreateWithoutAdminsInput = {
-    id?: string
-    name: string
-    address?: string | null
-    shortCode: string
-    currency: string
-    createdById: string
-    createdAt?: Date | string
-    items?: MenuItemUncheckedCreateNestedManyWithoutCompanyInput
-    orders?: OrderUncheckedCreateNestedManyWithoutCompanyInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutCompanyInput
-  }
-
-  export type CompanyCreateOrConnectWithoutAdminsInput = {
-    where: CompanyWhereUniqueInput
-    create: XOR<CompanyCreateWithoutAdminsInput, CompanyUncheckedCreateWithoutAdminsInput>
-  }
-
-  export type CompanyCreateWithoutCreatedByInput = {
-    id?: string
-    name: string
-    address?: string | null
-    shortCode: string
-    currency: string
-    createdAt?: Date | string
-    items?: MenuItemCreateNestedManyWithoutCompanyInput
-    orders?: OrderCreateNestedManyWithoutCompanyInput
-    admins?: UserCreateNestedManyWithoutCompaniesInput
-    reservations?: ReservationCreateNestedManyWithoutCompanyInput
-  }
-
-  export type CompanyUncheckedCreateWithoutCreatedByInput = {
+  export type CompanyUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
     address?: string | null
@@ -12941,18 +12722,12 @@ export namespace Prisma {
     createdAt?: Date | string
     items?: MenuItemUncheckedCreateNestedManyWithoutCompanyInput
     orders?: OrderUncheckedCreateNestedManyWithoutCompanyInput
-    admins?: UserUncheckedCreateNestedManyWithoutCompaniesInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutCompanyInput
   }
 
-  export type CompanyCreateOrConnectWithoutCreatedByInput = {
+  export type CompanyCreateOrConnectWithoutUserInput = {
     where: CompanyWhereUniqueInput
-    create: XOR<CompanyCreateWithoutCreatedByInput, CompanyUncheckedCreateWithoutCreatedByInput>
-  }
-
-  export type CompanyCreateManyCreatedByInputEnvelope = {
-    data: CompanyCreateManyCreatedByInput | CompanyCreateManyCreatedByInput[]
-    skipDuplicates?: boolean
+    create: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
   }
 
   export type OrderCreateWithoutUserInput = {
@@ -13065,49 +12840,39 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CompanyUpsertWithWhereUniqueWithoutAdminsInput = {
-    where: CompanyWhereUniqueInput
-    update: XOR<CompanyUpdateWithoutAdminsInput, CompanyUncheckedUpdateWithoutAdminsInput>
-    create: XOR<CompanyCreateWithoutAdminsInput, CompanyUncheckedCreateWithoutAdminsInput>
+  export type CompanyUpsertWithoutUserInput = {
+    update: XOR<CompanyUpdateWithoutUserInput, CompanyUncheckedUpdateWithoutUserInput>
+    create: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+    where?: CompanyWhereInput
   }
 
-  export type CompanyUpdateWithWhereUniqueWithoutAdminsInput = {
-    where: CompanyWhereUniqueInput
-    data: XOR<CompanyUpdateWithoutAdminsInput, CompanyUncheckedUpdateWithoutAdminsInput>
+  export type CompanyUpdateToOneWithWhereWithoutUserInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutUserInput, CompanyUncheckedUpdateWithoutUserInput>
   }
 
-  export type CompanyUpdateManyWithWhereWithoutAdminsInput = {
-    where: CompanyScalarWhereInput
-    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyWithoutAdminsInput>
+  export type CompanyUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    shortCode?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: MenuItemUpdateManyWithoutCompanyNestedInput
+    orders?: OrderUpdateManyWithoutCompanyNestedInput
+    reservations?: ReservationUpdateManyWithoutCompanyNestedInput
   }
 
-  export type CompanyScalarWhereInput = {
-    AND?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
-    OR?: CompanyScalarWhereInput[]
-    NOT?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
-    id?: StringFilter<"Company"> | string
-    name?: StringFilter<"Company"> | string
-    address?: StringNullableFilter<"Company"> | string | null
-    shortCode?: StringFilter<"Company"> | string
-    currency?: StringFilter<"Company"> | string
-    createdById?: StringFilter<"Company"> | string
-    createdAt?: DateTimeFilter<"Company"> | Date | string
-  }
-
-  export type CompanyUpsertWithWhereUniqueWithoutCreatedByInput = {
-    where: CompanyWhereUniqueInput
-    update: XOR<CompanyUpdateWithoutCreatedByInput, CompanyUncheckedUpdateWithoutCreatedByInput>
-    create: XOR<CompanyCreateWithoutCreatedByInput, CompanyUncheckedCreateWithoutCreatedByInput>
-  }
-
-  export type CompanyUpdateWithWhereUniqueWithoutCreatedByInput = {
-    where: CompanyWhereUniqueInput
-    data: XOR<CompanyUpdateWithoutCreatedByInput, CompanyUncheckedUpdateWithoutCreatedByInput>
-  }
-
-  export type CompanyUpdateManyWithWhereWithoutCreatedByInput = {
-    where: CompanyScalarWhereInput
-    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyWithoutCreatedByInput>
+  export type CompanyUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    shortCode?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: MenuItemUncheckedUpdateManyWithoutCompanyNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutCompanyNestedInput
+    reservations?: ReservationUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type OrderUpsertWithWhereUniqueWithoutUserInput = {
@@ -13295,7 +13060,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserCreateWithoutCompaniesInput = {
+  export type UserCreateWithoutCompanyInput = {
     id?: string
     email: string
     firebaseUid: string
@@ -13303,17 +13068,16 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    createdCompanies?: CompanyCreateNestedManyWithoutCreatedByInput
     orders?: OrderCreateNestedManyWithoutUserInput
     inviteCodesUsed?: InviteCodeCreateNestedManyWithoutUsedByInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutCompaniesInput = {
+  export type UserUncheckedCreateWithoutCompanyInput = {
     id?: string
     email: string
     firebaseUid: string
@@ -13321,60 +13085,18 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    createdCompanies?: CompanyUncheckedCreateNestedManyWithoutCreatedByInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     inviteCodesUsed?: InviteCodeUncheckedCreateNestedManyWithoutUsedByInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutCompaniesInput = {
+  export type UserCreateOrConnectWithoutCompanyInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput>
-  }
-
-  export type UserCreateWithoutCreatedCompaniesInput = {
-    id?: string
-    email: string
-    firebaseUid: string
-    givenName?: string | null
-    familyName?: string | null
-    phoneNumber?: string | null
-    address?: string | null
-    connectedAccountId: string
-    stripeConnectedLinked?: boolean
-    role?: $Enums.UserRole
-    createdAt?: Date | string
-    companies?: CompanyCreateNestedManyWithoutAdminsInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    inviteCodesUsed?: InviteCodeCreateNestedManyWithoutUsedByInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutCreatedCompaniesInput = {
-    id?: string
-    email: string
-    firebaseUid: string
-    givenName?: string | null
-    familyName?: string | null
-    phoneNumber?: string | null
-    address?: string | null
-    connectedAccountId: string
-    stripeConnectedLinked?: boolean
-    role?: $Enums.UserRole
-    createdAt?: Date | string
-    companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    inviteCodesUsed?: InviteCodeUncheckedCreateNestedManyWithoutUsedByInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutCreatedCompaniesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutCreatedCompaniesInput, UserUncheckedCreateWithoutCreatedCompaniesInput>
+    create: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
   }
 
   export type ReservationCreateWithoutCompanyInput = {
@@ -13461,51 +13183,18 @@ export namespace Prisma {
     data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutCompanyInput>
   }
 
-  export type UserUpsertWithWhereUniqueWithoutCompaniesInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutCompaniesInput, UserUncheckedUpdateWithoutCompaniesInput>
-    create: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput>
-  }
-
-  export type UserUpdateWithWhereUniqueWithoutCompaniesInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutCompaniesInput, UserUncheckedUpdateWithoutCompaniesInput>
-  }
-
-  export type UserUpdateManyWithWhereWithoutCompaniesInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutCompaniesInput>
-  }
-
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    firebaseUid?: StringFilter<"User"> | string
-    givenName?: StringNullableFilter<"User"> | string | null
-    familyName?: StringNullableFilter<"User"> | string | null
-    phoneNumber?: StringNullableFilter<"User"> | string | null
-    address?: StringNullableFilter<"User"> | string | null
-    connectedAccountId?: StringFilter<"User"> | string
-    stripeConnectedLinked?: BoolFilter<"User"> | boolean
-    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
-    createdAt?: DateTimeFilter<"User"> | Date | string
-  }
-
-  export type UserUpsertWithoutCreatedCompaniesInput = {
-    update: XOR<UserUpdateWithoutCreatedCompaniesInput, UserUncheckedUpdateWithoutCreatedCompaniesInput>
-    create: XOR<UserCreateWithoutCreatedCompaniesInput, UserUncheckedCreateWithoutCreatedCompaniesInput>
+  export type UserUpsertWithoutCompanyInput = {
+    update: XOR<UserUpdateWithoutCompanyInput, UserUncheckedUpdateWithoutCompanyInput>
+    create: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutCreatedCompaniesInput = {
+  export type UserUpdateToOneWithWhereWithoutCompanyInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutCreatedCompaniesInput, UserUncheckedUpdateWithoutCreatedCompaniesInput>
+    data: XOR<UserUpdateWithoutCompanyInput, UserUncheckedUpdateWithoutCompanyInput>
   }
 
-  export type UserUpdateWithoutCreatedCompaniesInput = {
+  export type UserUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     firebaseUid?: StringFieldUpdateOperationsInput | string
@@ -13513,17 +13202,16 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUpdateManyWithoutAdminsNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     inviteCodesUsed?: InviteCodeUpdateManyWithoutUsedByNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutCreatedCompaniesInput = {
+  export type UserUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     firebaseUid?: StringFieldUpdateOperationsInput | string
@@ -13531,11 +13219,10 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     inviteCodesUsed?: InviteCodeUncheckedUpdateManyWithoutUsedByNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
@@ -13565,8 +13252,7 @@ export namespace Prisma {
     currency: string
     createdAt?: Date | string
     orders?: OrderCreateNestedManyWithoutCompanyInput
-    admins?: UserCreateNestedManyWithoutCompaniesInput
-    createdBy: UserCreateNestedOneWithoutCreatedCompaniesInput
+    user?: UserCreateNestedOneWithoutCompanyInput
     reservations?: ReservationCreateNestedManyWithoutCompanyInput
   }
 
@@ -13576,10 +13262,9 @@ export namespace Prisma {
     address?: string | null
     shortCode: string
     currency: string
-    createdById: string
+    userId?: string | null
     createdAt?: Date | string
     orders?: OrderUncheckedCreateNestedManyWithoutCompanyInput
-    admins?: UserUncheckedCreateNestedManyWithoutCompaniesInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutCompanyInput
   }
 
@@ -13639,8 +13324,7 @@ export namespace Prisma {
     currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUpdateManyWithoutCompanyNestedInput
-    admins?: UserUpdateManyWithoutCompaniesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedCompaniesNestedInput
+    user?: UserUpdateOneWithoutCompanyNestedInput
     reservations?: ReservationUpdateManyWithoutCompanyNestedInput
   }
 
@@ -13650,10 +13334,9 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     shortCode?: StringFieldUpdateOperationsInput | string
     currency?: StringFieldUpdateOperationsInput | string
-    createdById?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUncheckedUpdateManyWithoutCompanyNestedInput
-    admins?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
@@ -13696,12 +13379,11 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    companies?: CompanyCreateNestedManyWithoutAdminsInput
-    createdCompanies?: CompanyCreateNestedManyWithoutCreatedByInput
+    company?: CompanyCreateNestedOneWithoutUserInput
     inviteCodesUsed?: InviteCodeCreateNestedManyWithoutUsedByInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
   }
@@ -13714,12 +13396,11 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
-    createdCompanies?: CompanyUncheckedCreateNestedManyWithoutCreatedByInput
+    company?: CompanyUncheckedCreateNestedOneWithoutUserInput
     inviteCodesUsed?: InviteCodeUncheckedCreateNestedManyWithoutUsedByInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
   }
@@ -13737,8 +13418,7 @@ export namespace Prisma {
     currency: string
     createdAt?: Date | string
     items?: MenuItemCreateNestedManyWithoutCompanyInput
-    admins?: UserCreateNestedManyWithoutCompaniesInput
-    createdBy: UserCreateNestedOneWithoutCreatedCompaniesInput
+    user?: UserCreateNestedOneWithoutCompanyInput
     reservations?: ReservationCreateNestedManyWithoutCompanyInput
   }
 
@@ -13748,10 +13428,9 @@ export namespace Prisma {
     address?: string | null
     shortCode: string
     currency: string
-    createdById: string
+    userId?: string | null
     createdAt?: Date | string
     items?: MenuItemUncheckedCreateNestedManyWithoutCompanyInput
-    admins?: UserUncheckedCreateNestedManyWithoutCompaniesInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutCompanyInput
   }
 
@@ -13811,12 +13490,11 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUpdateManyWithoutAdminsNestedInput
-    createdCompanies?: CompanyUpdateManyWithoutCreatedByNestedInput
+    company?: CompanyUpdateOneWithoutUserNestedInput
     inviteCodesUsed?: InviteCodeUpdateManyWithoutUsedByNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
   }
@@ -13829,12 +13507,11 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
-    createdCompanies?: CompanyUncheckedUpdateManyWithoutCreatedByNestedInput
+    company?: CompanyUncheckedUpdateOneWithoutUserNestedInput
     inviteCodesUsed?: InviteCodeUncheckedUpdateManyWithoutUsedByNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -13858,8 +13535,7 @@ export namespace Prisma {
     currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: MenuItemUpdateManyWithoutCompanyNestedInput
-    admins?: UserUpdateManyWithoutCompaniesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedCompaniesNestedInput
+    user?: UserUpdateOneWithoutCompanyNestedInput
     reservations?: ReservationUpdateManyWithoutCompanyNestedInput
   }
 
@@ -13869,10 +13545,9 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     shortCode?: StringFieldUpdateOperationsInput | string
     currency?: StringFieldUpdateOperationsInput | string
-    createdById?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: MenuItemUncheckedUpdateManyWithoutCompanyNestedInput
-    admins?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
@@ -14065,8 +13740,7 @@ export namespace Prisma {
     createdAt?: Date | string
     items?: MenuItemCreateNestedManyWithoutCompanyInput
     orders?: OrderCreateNestedManyWithoutCompanyInput
-    admins?: UserCreateNestedManyWithoutCompaniesInput
-    createdBy: UserCreateNestedOneWithoutCreatedCompaniesInput
+    user?: UserCreateNestedOneWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutReservationsInput = {
@@ -14075,11 +13749,10 @@ export namespace Prisma {
     address?: string | null
     shortCode: string
     currency: string
-    createdById: string
+    userId?: string | null
     createdAt?: Date | string
     items?: MenuItemUncheckedCreateNestedManyWithoutCompanyInput
     orders?: OrderUncheckedCreateNestedManyWithoutCompanyInput
-    admins?: UserUncheckedCreateNestedManyWithoutCompaniesInput
   }
 
   export type CompanyCreateOrConnectWithoutReservationsInput = {
@@ -14095,12 +13768,11 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    companies?: CompanyCreateNestedManyWithoutAdminsInput
-    createdCompanies?: CompanyCreateNestedManyWithoutCreatedByInput
+    company?: CompanyCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     inviteCodesUsed?: InviteCodeCreateNestedManyWithoutUsedByInput
   }
@@ -14113,12 +13785,11 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
-    createdCompanies?: CompanyUncheckedCreateNestedManyWithoutCreatedByInput
+    company?: CompanyUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     inviteCodesUsed?: InviteCodeUncheckedCreateNestedManyWithoutUsedByInput
   }
@@ -14148,8 +13819,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: MenuItemUpdateManyWithoutCompanyNestedInput
     orders?: OrderUpdateManyWithoutCompanyNestedInput
-    admins?: UserUpdateManyWithoutCompaniesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedCompaniesNestedInput
+    user?: UserUpdateOneWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutReservationsInput = {
@@ -14158,11 +13828,10 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     shortCode?: StringFieldUpdateOperationsInput | string
     currency?: StringFieldUpdateOperationsInput | string
-    createdById?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: MenuItemUncheckedUpdateManyWithoutCompanyNestedInput
     orders?: OrderUncheckedUpdateManyWithoutCompanyNestedInput
-    admins?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
   }
 
   export type UserUpsertWithoutReservationsInput = {
@@ -14184,12 +13853,11 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUpdateManyWithoutAdminsNestedInput
-    createdCompanies?: CompanyUpdateManyWithoutCreatedByNestedInput
+    company?: CompanyUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     inviteCodesUsed?: InviteCodeUpdateManyWithoutUsedByNestedInput
   }
@@ -14202,12 +13870,11 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
-    createdCompanies?: CompanyUncheckedUpdateManyWithoutCreatedByNestedInput
+    company?: CompanyUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     inviteCodesUsed?: InviteCodeUncheckedUpdateManyWithoutUsedByNestedInput
   }
@@ -14220,12 +13887,11 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    companies?: CompanyCreateNestedManyWithoutAdminsInput
-    createdCompanies?: CompanyCreateNestedManyWithoutCreatedByInput
+    company?: CompanyCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
   }
@@ -14238,12 +13904,11 @@ export namespace Prisma {
     familyName?: string | null
     phoneNumber?: string | null
     address?: string | null
-    connectedAccountId: string
+    connectedAccountId?: string | null
     stripeConnectedLinked?: boolean
     role?: $Enums.UserRole
     createdAt?: Date | string
-    companies?: CompanyUncheckedCreateNestedManyWithoutAdminsInput
-    createdCompanies?: CompanyUncheckedCreateNestedManyWithoutCreatedByInput
+    company?: CompanyUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
   }
@@ -14272,12 +13937,11 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUpdateManyWithoutAdminsNestedInput
-    createdCompanies?: CompanyUpdateManyWithoutCreatedByNestedInput
+    company?: CompanyUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
   }
@@ -14290,23 +13954,13 @@ export namespace Prisma {
     familyName?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    connectedAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companies?: CompanyUncheckedUpdateManyWithoutAdminsNestedInput
-    createdCompanies?: CompanyUncheckedUpdateManyWithoutCreatedByNestedInput
+    company?: CompanyUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type CompanyCreateManyCreatedByInput = {
-    id?: string
-    name: string
-    address?: string | null
-    shortCode: string
-    currency: string
-    createdAt?: Date | string
   }
 
   export type OrderCreateManyUserInput = {
@@ -14346,77 +14000,6 @@ export namespace Prisma {
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
-  }
-
-  export type CompanyUpdateWithoutAdminsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    shortCode?: StringFieldUpdateOperationsInput | string
-    currency?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: MenuItemUpdateManyWithoutCompanyNestedInput
-    orders?: OrderUpdateManyWithoutCompanyNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedCompaniesNestedInput
-    reservations?: ReservationUpdateManyWithoutCompanyNestedInput
-  }
-
-  export type CompanyUncheckedUpdateWithoutAdminsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    shortCode?: StringFieldUpdateOperationsInput | string
-    currency?: StringFieldUpdateOperationsInput | string
-    createdById?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: MenuItemUncheckedUpdateManyWithoutCompanyNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutCompanyNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutCompanyNestedInput
-  }
-
-  export type CompanyUncheckedUpdateManyWithoutAdminsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    shortCode?: StringFieldUpdateOperationsInput | string
-    currency?: StringFieldUpdateOperationsInput | string
-    createdById?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CompanyUpdateWithoutCreatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    shortCode?: StringFieldUpdateOperationsInput | string
-    currency?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: MenuItemUpdateManyWithoutCompanyNestedInput
-    orders?: OrderUpdateManyWithoutCompanyNestedInput
-    admins?: UserUpdateManyWithoutCompaniesNestedInput
-    reservations?: ReservationUpdateManyWithoutCompanyNestedInput
-  }
-
-  export type CompanyUncheckedUpdateWithoutCreatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    shortCode?: StringFieldUpdateOperationsInput | string
-    currency?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: MenuItemUncheckedUpdateManyWithoutCompanyNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutCompanyNestedInput
-    admins?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutCompanyNestedInput
-  }
-
-  export type CompanyUncheckedUpdateManyWithoutCreatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    shortCode?: StringFieldUpdateOperationsInput | string
-    currency?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderUpdateWithoutUserInput = {
@@ -14676,56 +14259,6 @@ export namespace Prisma {
     totalOrderCost?: FloatFieldUpdateOperationsInput | number
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     orderDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserUpdateWithoutCompaniesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    firebaseUid?: StringFieldUpdateOperationsInput | string
-    givenName?: NullableStringFieldUpdateOperationsInput | string | null
-    familyName?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
-    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdCompanies?: CompanyUpdateManyWithoutCreatedByNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    inviteCodesUsed?: InviteCodeUpdateManyWithoutUsedByNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutCompaniesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    firebaseUid?: StringFieldUpdateOperationsInput | string
-    givenName?: NullableStringFieldUpdateOperationsInput | string | null
-    familyName?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
-    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdCompanies?: CompanyUncheckedUpdateManyWithoutCreatedByNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    inviteCodesUsed?: InviteCodeUncheckedUpdateManyWithoutUsedByNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateManyWithoutCompaniesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    firebaseUid?: StringFieldUpdateOperationsInput | string
-    givenName?: NullableStringFieldUpdateOperationsInput | string | null
-    familyName?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    connectedAccountId?: StringFieldUpdateOperationsInput | string
-    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

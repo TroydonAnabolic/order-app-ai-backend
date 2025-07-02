@@ -6,8 +6,15 @@ const prisma = new PrismaClient();
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { email, firebaseUid, phoneNumber, givenName, familyName, address } =
-      body;
+    const {
+      email,
+      firebaseUid,
+      phoneNumber,
+      givenName,
+      familyName,
+      address,
+      connectedAccountId,
+    } = body;
 
     console.log("Received registration data from server:", email);
 
@@ -33,6 +40,7 @@ export async function POST(req: NextRequest) {
         address,
         role: "SUPER_ADMIN",
         createdAt: new Date(),
+        connectedAccountId,
       },
     });
 

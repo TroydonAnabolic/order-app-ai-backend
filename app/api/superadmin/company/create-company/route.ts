@@ -22,12 +22,6 @@ export async function POST(request: Request) {
   });
 
   try {
-    // get the user based on firebaseUid
-    const user = await prisma.user.findUnique({
-      where: { firebaseUid },
-      select: { id: true },
-    });
-
     // generate unique shortcode:
     let code: string = "";
     let exists = true;
@@ -45,10 +39,6 @@ export async function POST(request: Request) {
         address,
         shortCode: code,
         currency: "USD",
-        createdBy: {
-          // Replace the following with the actual user ID or object as required by your schema
-          connect: { id: user?.id },
-        },
       },
     });
 

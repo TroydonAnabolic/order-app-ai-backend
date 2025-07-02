@@ -10,6 +10,8 @@ CREATE TABLE "User" (
     "familyName" TEXT,
     "phoneNumber" TEXT,
     "address" TEXT,
+    "connectedAccountId" TEXT NOT NULL,
+    "stripeConnectedLinked" BOOLEAN NOT NULL DEFAULT false,
     "role" "UserRole" NOT NULL DEFAULT 'CUSTOMER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -23,7 +25,7 @@ CREATE TABLE "Company" (
     "address" TEXT,
     "shortCode" TEXT NOT NULL,
     "currency" TEXT NOT NULL,
-    "createdById" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Company_pkey" PRIMARY KEY ("id")
@@ -35,10 +37,11 @@ CREATE TABLE "MenuItem" (
     "companyId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
-    "price" DOUBLE PRECISION NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    "quantity" INTEGER NOT NULL DEFAULT 0,
     "currency" TEXT,
-    "stripeProductId" TEXT,
-    "stripePricingId" TEXT,
+    "size" TEXT NOT NULL DEFAULT 'Medium',
+    "specialInstructions" TEXT NOT NULL DEFAULT 'No special instructions',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "MenuItem_pkey" PRIMARY KEY ("id")
@@ -47,12 +50,14 @@ CREATE TABLE "MenuItem" (
 -- CreateTable
 CREATE TABLE "Order" (
     "id" TEXT NOT NULL,
+    "shortCode" TEXT NOT NULL,
     "userId" TEXT,
     "companyId" TEXT NOT NULL,
     "customerName" TEXT NOT NULL,
     "phoneNumber" TEXT NOT NULL,
     "diningType" TEXT NOT NULL,
     "seatNo" TEXT,
+    "preferredDiningDate" TEXT,
     "preferredDiningTime" TEXT,
     "preferredDeliveryTime" TEXT,
     "preferredPickupTime" TEXT,
@@ -81,6 +86,23 @@ CREATE TABLE "OrderItem" (
 );
 
 -- CreateTable
+CREATE TABLE "Reservation" (
+    "id" TEXT NOT NULL,
+    "companyId" TEXT NOT NULL,
+    "userId" TEXT,
+    "shortCode" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "diningDate" TIMESTAMP(3) NOT NULL,
+    "preferredTime" TEXT,
+    "seatNumbers" TEXT NOT NULL,
+    "specialInstructions" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Reservation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "InviteCode" (
     "id" TEXT NOT NULL,
     "code" TEXT NOT NULL,
@@ -89,14 +111,6 @@ CREATE TABLE "InviteCode" (
     "usedById" TEXT,
 
     CONSTRAINT "InviteCode_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "_CompanyAdmins" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL,
-
-    CONSTRAINT "_CompanyAdmins_AB_pkey" PRIMARY KEY ("A","B")
 );
 
 -- CreateIndex
@@ -109,16 +123,25 @@ CREATE UNIQUE INDEX "User_firebaseUid_key" ON "User"("firebaseUid");
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_connectedAccountId_key" ON "User"("connectedAccountId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Company_shortCode_key" ON "Company"("shortCode");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Company_userId_key" ON "Company"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Order_shortCode_key" ON "Order"("shortCode");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Reservation_shortCode_key" ON "Reservation"("shortCode");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "InviteCode_code_key" ON "InviteCode"("code");
 
--- CreateIndex
-CREATE INDEX "_CompanyAdmins_B_index" ON "_CompanyAdmins"("B");
-
 -- AddForeignKey
-ALTER TABLE "Company" ADD CONSTRAINT "Company_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Company" ADD CONSTRAINT "Company_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "MenuItem" ADD CONSTRAINT "MenuItem_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -136,10 +159,10 @@ ALTER TABLE "OrderItem" ADD CONSTRAINT "OrderItem_orderId_fkey" FOREIGN KEY ("or
 ALTER TABLE "OrderItem" ADD CONSTRAINT "OrderItem_itemId_fkey" FOREIGN KEY ("itemId") REFERENCES "MenuItem"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "InviteCode" ADD CONSTRAINT "InviteCode_usedById_fkey" FOREIGN KEY ("usedById") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_CompanyAdmins" ADD CONSTRAINT "_CompanyAdmins_A_fkey" FOREIGN KEY ("A") REFERENCES "Company"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_CompanyAdmins" ADD CONSTRAINT "_CompanyAdmins_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

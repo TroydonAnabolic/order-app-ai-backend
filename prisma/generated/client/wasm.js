@@ -140,7 +140,7 @@ exports.Prisma.CompanyScalarFieldEnum = {
   address: 'address',
   shortCode: 'shortCode',
   currency: 'currency',
-  createdById: 'createdById',
+  userId: 'userId',
   createdAt: 'createdAt'
 };
 

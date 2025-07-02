@@ -2,8 +2,15 @@ import { PrismaClient } from "@/prisma/generated/client";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { email, firebaseUid, phoneNumber, givenName, familyName, address } =
-    body;
+  const {
+    email,
+    firebaseUid,
+    phoneNumber,
+    givenName,
+    familyName,
+    address,
+    connectedAccountId,
+  } = body;
 
   console.log("Received registration data from server:");
 
@@ -39,6 +46,7 @@ export async function POST(request: Request) {
         familyName,
         phoneNumber,
         address,
+        connectedAccountId,
       },
     });
   } catch (error) {

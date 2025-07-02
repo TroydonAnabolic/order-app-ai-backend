@@ -22,18 +22,35 @@ export async function POST(request: Request) {
   });
 
   try {
-    // Disconnect the user from the company's admins list
-    await prisma.company.update({
+    // Ensure the company is currently linked to the specified admin
+    const company = await prisma.company.findUnique({
+      where: { id: companyId },
+    });
+
+    if (!company || company.userId !== adminId) {
+      return new Response(
+        JSON.stringify({
+          error: "Company is not linked to the specified admin.",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    // Unlink the user by setting userId to null
+    const updatedCompany = await prisma.company.update({
       where: { id: companyId },
       data: {
-        admins: {
-          disconnect: { id: adminId },
+        user: {
+          disconnect: true,
         },
       },
     });
 
     return new Response(
-      JSON.stringify({ message: "Admin unlinked from company." }),
+      JSON.stringify({
+        message: "User unlinked from company.",
+        company: updatedCompany,
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
@@ -42,7 +59,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Unlink Error:", error);
     return new Response(
-      JSON.stringify({ error: "Failed to unlink admin from company." }),
+      JSON.stringify({ error: "Failed to unlink user from company." }),
       {
         status: 500,
         headers: { "Content-Type": "application/json" },

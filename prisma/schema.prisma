@@ -9,38 +9,37 @@ generator client {
 }
 
 model User {
-  id                String     @id @default(cuid())
-  email             String     @unique
-  firebaseUid       String     @unique
-  givenName         String?
-  familyName        String?
-  phoneNumber       String?    @unique
-  address           String?
-  connectedAccountId String   @unique
+  id                  String    @id @default(cuid())
+  email               String    @unique
+  firebaseUid         String    @unique
+  givenName           String?
+  familyName          String?
+  phoneNumber         String?   @unique
+  address             String?
+  connectedAccountId  String?    @unique
   stripeConnectedLinked Boolean @default(false)
-  role              UserRole   @default(CUSTOMER)
-  companies         Company[]  @relation("CompanyAdmins")
-  createdCompanies  Company[]  @relation("UserCreatedCompanies")
-  orders            Order[]
-  createdAt         DateTime   @default(now())
-  inviteCodesUsed   InviteCode[] @relation("InviteCodeUsedBy")
-  reservations    Reservation[]
+  role                UserRole  @default(CUSTOMER)
+  company             Company?  @relation("UserCompany")
+  orders              Order[]
+  inviteCodesUsed     InviteCode[] @relation("InviteCodeUsedBy")
+  reservations        Reservation[]
+  createdAt           DateTime  @default(now())
 }
 
 model Company {
-  id            String    @id @default(cuid())
+  id            String   @id @default(cuid())
   name          String
   address       String?
-  shortCode     String     @unique // 4-digit unique code
+  shortCode     String   @unique
   currency      String
   items         MenuItem[]
   orders        Order[]
-  admins        User[]    @relation("CompanyAdmins")
-  createdById   String
-  createdBy     User      @relation("UserCreatedCompanies", fields: [createdById], references: [id])
-  createdAt     DateTime  @default(now())
-  reservations    Reservation[]
+  userId        String?   @unique
+  user          User?     @relation("UserCompany", fields: [userId], references: [id])
+  reservations  Reservation[]
+  createdAt     DateTime @default(now())
 }
+
 
 enum UserRole {
   SUPER_ADMIN

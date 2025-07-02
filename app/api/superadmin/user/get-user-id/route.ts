@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
         familyName: true,
         address: true,
         role: true,
-        companies: true, // Assumes correct relation set in Prisma schema
+        company: true, // Assumes correct relation set in Prisma schema
       },
     });
 

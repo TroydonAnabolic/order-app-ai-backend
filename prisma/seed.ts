@@ -91,14 +91,12 @@ async function seed() {
     }),
   ]);
 
-  // Step 2: Get customer user reference
   const customerUser = users.find((u) => u.email === "tluicien@yahoo.co.nz");
   if (!customerUser) throw new Error("Customer user not found");
 
-  // Step 3: Filter out only COMPANY_ADMINs
   const companyAdmins = users.filter((u) => u.role === UserRole.COMPANY_ADMIN);
 
-  // Step 4: Create companies
+  // Step 2: Create companies with direct one-to-one user assignment
   const companies = await Promise.all(
     companyAdmins.map((admin, index) =>
       prisma.company.create({
@@ -107,16 +105,15 @@ async function seed() {
           shortCode: `${1000 + index}`,
           currency: "NZD",
           address: "Company Address",
-          createdById: admin.id,
-          admins: {
-            connect: [{ id: admin.id }],
+          user: {
+            connect: { id: admin.id },
           },
         },
       })
     )
   );
 
-  // Step 5: Create menu items for each company
+  // Step 3: Create menu items
   await Promise.all(
     companies.map((company) =>
       prisma.menuItem.createMany({
@@ -146,10 +143,10 @@ async function seed() {
     )
   );
 
-  // Step 6: Create orders and reservations by the customerUser
+  // Step 4: Create orders and reservations for the customer
   await Promise.all(
     companies.map(async (company, idx) => {
-      const order = await prisma.order.create({
+      await prisma.order.create({
         data: {
           shortCode: `${2000 + idx}`,
           customerName: `${customerUser.givenName} ${customerUser.familyName}`,
@@ -174,7 +171,6 @@ async function seed() {
                 quantity: 1,
                 pricePerItem: 4.5,
                 totalPrice: 4.5,
-                specialInstructions: "",
               },
               {
                 itemName: "Latte",
@@ -182,7 +178,6 @@ async function seed() {
                 quantity: 1,
                 pricePerItem: 5.0,
                 totalPrice: 5.0,
-                specialInstructions: "",
               },
             ],
           },

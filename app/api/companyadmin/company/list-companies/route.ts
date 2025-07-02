@@ -27,7 +27,7 @@ export async function GET(request: Request) {
         id: true,
         email: true,
         firebaseUid: true,
-        companies: {
+        company: {
           select: {
             id: true,
             name: true,
@@ -45,7 +45,7 @@ export async function GET(request: Request) {
     }
 
     // Return only the companies array
-    return new Response(JSON.stringify(user.companies ?? []), {
+    return new Response(JSON.stringify(user.company ?? []), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

@@ -11,6 +11,7 @@ export async function POST(request: Request) {
     familyName,
     address,
     inviteCode,
+    connectedAccountId,
   } = body;
 
   console.log("Received registration data from server:");
@@ -68,6 +69,7 @@ export async function POST(request: Request) {
         address,
         role: "COMPANY_ADMIN",
         createdAt: new Date(),
+        connectedAccountId,
       },
     });
 

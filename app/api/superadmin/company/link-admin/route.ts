@@ -22,26 +22,30 @@ export async function POST(request: Request) {
   });
 
   try {
-    // Connect the user to the company as an admin
-    await prisma.company.update({
+    // Update the company to link the admin user
+    const updatedCompany = await prisma.company.update({
       where: { id: companyId },
       data: {
-        admins: {
+        user: {
           connect: { id: adminId },
         },
       },
     });
 
     return new Response(
-      JSON.stringify({ message: "Admin linked to company." }),
+      JSON.stringify({
+        message: "User linked to company.",
+        company: updatedCompany,
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
       }
     );
   } catch (error) {
+    console.error("❌ Failed to link user:", error);
     return new Response(
-      JSON.stringify({ error: "Failed to link admin to company." }),
+      JSON.stringify({ error: "Failed to link user to company." }),
       {
         status: 500,
         headers: { "Content-Type": "application/json" },
