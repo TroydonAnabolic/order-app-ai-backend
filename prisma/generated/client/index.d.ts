@@ -7929,7 +7929,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date
-    preferredTime: string
+    preferredTime: string | null
     seatNumbers: string
     specialInstructions: string | null
     createdAt: Date
@@ -8042,7 +8042,7 @@ export namespace Prisma {
       name: string
       phoneNumber: string
       diningDate: Date
-      preferredTime: string
+      preferredTime: string | null
       seatNumbers: string
       specialInstructions: string | null
       createdAt: Date
@@ -10700,7 +10700,7 @@ export namespace Prisma {
     name?: StringFilter<"Reservation"> | string
     phoneNumber?: StringFilter<"Reservation"> | string
     diningDate?: DateTimeFilter<"Reservation"> | Date | string
-    preferredTime?: StringFilter<"Reservation"> | string
+    preferredTime?: StringNullableFilter<"Reservation"> | string | null
     seatNumbers?: StringFilter<"Reservation"> | string
     specialInstructions?: StringNullableFilter<"Reservation"> | string | null
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -10716,7 +10716,7 @@ export namespace Prisma {
     name?: SortOrder
     phoneNumber?: SortOrder
     diningDate?: SortOrder
-    preferredTime?: SortOrder
+    preferredTime?: SortOrderInput | SortOrder
     seatNumbers?: SortOrder
     specialInstructions?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -10735,7 +10735,7 @@ export namespace Prisma {
     name?: StringFilter<"Reservation"> | string
     phoneNumber?: StringFilter<"Reservation"> | string
     diningDate?: DateTimeFilter<"Reservation"> | Date | string
-    preferredTime?: StringFilter<"Reservation"> | string
+    preferredTime?: StringNullableFilter<"Reservation"> | string | null
     seatNumbers?: StringFilter<"Reservation"> | string
     specialInstructions?: StringNullableFilter<"Reservation"> | string | null
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -10751,7 +10751,7 @@ export namespace Prisma {
     name?: SortOrder
     phoneNumber?: SortOrder
     diningDate?: SortOrder
-    preferredTime?: SortOrder
+    preferredTime?: SortOrderInput | SortOrder
     seatNumbers?: SortOrder
     specialInstructions?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -10771,7 +10771,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Reservation"> | string
     phoneNumber?: StringWithAggregatesFilter<"Reservation"> | string
     diningDate?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
-    preferredTime?: StringWithAggregatesFilter<"Reservation"> | string
+    preferredTime?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
     seatNumbers?: StringWithAggregatesFilter<"Reservation"> | string
     specialInstructions?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
@@ -11359,7 +11359,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -11375,7 +11375,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -11387,7 +11387,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11403,7 +11403,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11417,7 +11417,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -11429,7 +11429,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11443,7 +11443,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13035,7 +13035,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -13049,7 +13049,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -13203,7 +13203,7 @@ export namespace Prisma {
     name?: StringFilter<"Reservation"> | string
     phoneNumber?: StringFilter<"Reservation"> | string
     diningDate?: DateTimeFilter<"Reservation"> | Date | string
-    preferredTime?: StringFilter<"Reservation"> | string
+    preferredTime?: StringNullableFilter<"Reservation"> | string | null
     seatNumbers?: StringFilter<"Reservation"> | string
     specialInstructions?: StringNullableFilter<"Reservation"> | string | null
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -13383,7 +13383,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -13397,7 +13397,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -14342,7 +14342,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -14505,7 +14505,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14519,7 +14519,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14532,7 +14532,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14576,7 +14576,7 @@ export namespace Prisma {
     name: string
     phoneNumber: string
     diningDate: Date | string
-    preferredTime: string
+    preferredTime?: string | null
     seatNumbers: string
     specialInstructions?: string | null
     createdAt?: Date | string
@@ -14735,7 +14735,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14749,7 +14749,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14762,7 +14762,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     diningDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferredTime?: StringFieldUpdateOperationsInput | string
+    preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
     seatNumbers?: StringFieldUpdateOperationsInput | string
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

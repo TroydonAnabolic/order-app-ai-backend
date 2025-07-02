@@ -108,7 +108,7 @@ model Reservation {
   name                 String
   phoneNumber          String
   diningDate           DateTime
-  preferredTime        String
+  preferredTime        String?
   seatNumbers          String   // comma-separated list (can later normalize if needed)
   specialInstructions  String?
   createdAt            DateTime @default(now())
