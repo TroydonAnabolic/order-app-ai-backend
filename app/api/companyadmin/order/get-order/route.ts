@@ -27,6 +27,7 @@ export async function GET(request: Request) {
       where: { id: orderId },
       select: {
         id: true,
+        shortCode: true,
         userId: true,
         companyId: true,
         company: true,

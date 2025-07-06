@@ -43,6 +43,7 @@ export async function GET(request: Request) {
       where: { companyId: user.company.id },
       select: {
         id: true,
+        shortCode: true,
         userId: true,
         companyId: true,
         company: true,
