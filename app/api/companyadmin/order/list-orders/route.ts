@@ -45,6 +45,7 @@ export async function GET(request: Request) {
         id: true,
         userId: true,
         companyId: true,
+        company: true,
         customerName: true,
         phoneNumber: true,
         diningType: true,
