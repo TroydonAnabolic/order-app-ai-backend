@@ -1,3 +1,4 @@
+import { stripe } from "@/lib/stripe";
 import { PrismaClient } from "@/prisma/generated/client";
 
 // TODO: Implement this for staff registration app instead, super admin must not have registration
@@ -11,7 +12,6 @@ export async function POST(request: Request) {
     familyName,
     address,
     inviteCode,
-    connectedAccountId,
   } = body;
 
   console.log("Received registration data from server:");
@@ -57,6 +57,22 @@ export async function POST(request: Request) {
       });
     }
 
+    // create stripe account
+    const account = await stripe.accounts.create({
+      email: email as string,
+      controller: {
+        losses: {
+          payments: "application",
+        },
+        fees: {
+          payer: "application",
+        },
+        stripe_dashboard: {
+          type: "express",
+        },
+      },
+    });
+
     // Create an admin user in the database
     console.log("Creating user in the database with email:", email);
     const user = await prisma.user.create({
@@ -69,7 +85,7 @@ export async function POST(request: Request) {
         address,
         role: "COMPANY_ADMIN",
         createdAt: new Date(),
-        connectedAccountId,
+        connectedAccountId: account.id, // link stripe account
       },
     });
 
