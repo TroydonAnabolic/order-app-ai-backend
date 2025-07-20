@@ -1,14 +1,13 @@
 "use client";
 
+import Link from "next/link";
+
 const BillingPage = () => {
-    const handleLinkStripeAccount = () => {
-        // Use different deep link based on environment
-        const isDev = process.env.NODE_ENV === "development";
-        const deepLink = isDev
-            ? "exp://192.168.1.12:8081/--/billing"
-            : "orderappcompany://billing";
-        window.location.href = deepLink;
-    };
+    const isDev = process.env.NODE_ENV === "development";
+    const deepLink = isDev
+        ? "exp://192.168.1.12:8081/--/billing"
+        : "exp://192.168.1.12:8081/--/billing"; // TODO: Update this to use the correct deep link for production
+    //  : "orderappcompany://billing";
 
     return (
         <main className="relative isolate max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
@@ -20,12 +19,12 @@ const BillingPage = () => {
                     Manage your billing and payment methods here.
                 </p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
-                    <button
-                        onClick={handleLinkStripeAccount}
+                    <Link
+                        href={deepLink}
                         className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                     >
                         Return to Billing
-                    </button>
+                    </Link>
                 </div>
             </div>
         </main>
