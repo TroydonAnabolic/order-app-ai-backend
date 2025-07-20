@@ -30,13 +30,37 @@ export async function POST(request: Request) {
       });
     }
 
-    const origin = request.headers.get("origin");
-    console.log("Origin URL:", origin);
+    //const origin = request.headers.get("origin");
+    //console.log("Origin URL:", origin);
 
+    // const accountLink = await stripe.accountLinks.create({
+    //   account: user?.connectedAccountId as string,
+    //   refresh_url:
+    //     process.env.NODE_ENV === `development`
+    //       ? `exp://192.168.1.12:8081/--/billing`
+    //       : `orderappcompany://billing`,
+    //   return_url:
+    //     process.env.NODE_ENV === `development`
+    //       ? `exp://192.168.1.12:8081/--/return/${user?.connectedAccountId}`
+    //       : `orderappcompany://return/${user?.connectedAccountId}`,
+    //   type: "account_onboarding",
+    // });
+
+    // TODO: Create the pages for the refresh url and return url, and have a button on it
+    // that deep links back to the expo app
     const accountLink = await stripe.accountLinks.create({
       account: user?.connectedAccountId as string,
-      refresh_url: `${origin}/billing`,
-      return_url: `${origin}/return/${user?.connectedAccountId}`,
+      refresh_url:
+        process.env.NODE_ENV === "development"
+          ? `http://localhost:3000/billing`
+          : `https://order-app-ai-backend.vercel.app/billing`,
+      return_url:
+        process.env.NODE_ENV === "development"
+          ? // ? `http://localhost:3000/return/${user?.connectedAccountId}`
+            // : `https://order-app-ai-backend.vercel.app/return/${user?.connectedAccountId}`,
+            `http://localhost:3000/billing`
+          : `https://order-app-ai-backend.vercel.app/billing`,
+
       type: "account_onboarding",
     });
 
