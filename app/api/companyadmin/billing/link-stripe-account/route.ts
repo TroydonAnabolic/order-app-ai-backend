@@ -58,8 +58,8 @@ export async function POST(request: Request) {
         process.env.NODE_ENV === "development"
           ? // ? `http://localhost:3000/return/${user?.connectedAccountId}`
             // : `https://order-app-ai-backend.vercel.app/return/${user?.connectedAccountId}`,
-            `http://localhost:3000/billing`
-          : `https://order-app-ai-backend.vercel.app/billing`,
+            `http://localhost:3000/return/${user?.connectedAccountId}`
+          : `https://order-app-ai-backend.vercel.app/return/${user?.connectedAccountId}`,
 
       type: "account_onboarding",
     });
