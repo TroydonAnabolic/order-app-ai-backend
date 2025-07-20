@@ -66,7 +66,7 @@ export async function POST(request: Request) {
 
     console.log("Stripe account link created on the server:", accountLink.url);
 
-    return new Response(accountLink.url, {
+    return new Response(JSON.stringify({ url: accountLink.url }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
